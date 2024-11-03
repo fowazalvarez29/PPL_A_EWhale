@@ -381,6 +381,37 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_check_courier_community_status` BEFORE INSERT ON `pickup_waste` FOR EACH ROW BEGIN
+    -- Periksa apakah courier memenuhi syarat
+    IF NEW.courier_id IS NOT NULL THEN
+        IF NOT is_courier_verified(NEW.courier_id) THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Courier Not Verified or Active!';
+        END IF;
+    END IF;
+
+    -- Periksa apakah community memenuhi syarat
+    IF NEW.community_id IS NOT NULL THEN
+        IF NOT is_community_verified(NEW.community_id) THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = "You're Not Verified!";
+        END IF;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_points_courier_community` AFTER UPDATE ON `pickup_waste` FOR EACH ROW BEGIN
     DECLARE total_points INT DEFAULT 0;
 
@@ -749,6 +780,64 @@ BEGIN
     END IF;
 
     RETURN is_valid;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `is_community_verified` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `is_community_verified`(communityId INT) RETURNS tinyint(1)
+    DETERMINISTIC
+BEGIN
+    DECLARE verified TINYINT;
+
+    -- Pastikan query hanya mengembalikan satu baris
+    SELECT is_verified INTO verified
+    FROM community
+    WHERE community_id = communityId
+    LIMIT 1;
+
+    -- Kembalikan TRUE jika community terverifikasi
+    RETURN (verified = 1);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `is_courier_verified` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `is_courier_verified`(courierId INT) RETURNS tinyint(1)
+    DETERMINISTIC
+BEGIN
+    DECLARE verified TINYINT;
+
+    -- Pastikan query hanya mengembalikan satu baris
+    SELECT is_verified INTO verified
+    FROM courier
+    WHERE courier_id = courierId
+    LIMIT 1;
+
+    -- Kembalikan TRUE jika courier terverifikasi
+    RETURN (verified = 1);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1301,4 +1390,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-03 23:07:35
+-- Dump completed on 2024-11-03 23:15:21

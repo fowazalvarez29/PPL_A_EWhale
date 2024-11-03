@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE OR REPLACE FUNCTION is_courier_verified_and_active(courierId INT) 
+CREATE FUNCTION is_courier_verified(courierId INT) 
 RETURNS BOOLEAN
 DETERMINISTIC
 BEGIN
@@ -12,7 +12,7 @@ BEGIN
     WHERE courier_id = courierId
     LIMIT 1;
 
-    -- Kembalikan TRUE jika courier terverifikasi dan aktif
+    -- Kembalikan TRUE jika courier terverifikasi
     RETURN (verified = 1);
 END //
 
