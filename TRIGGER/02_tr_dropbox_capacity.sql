@@ -12,9 +12,9 @@ BEGIN
     WHERE dropbox_id = (SELECT dropbox_id FROM pickup_waste WHERE pickup_id = NEW.pickup_id);
 
     -- Memperbarui kapasitas dan status pada tabel dropbox
-    IF new_capacity >= 1000 THEN
+    IF new_capacity >= 100 THEN
         UPDATE dropbox
-        SET capacity = 1000, status = 'Full'
+        SET capacity = 100, status = 'Full'
         WHERE dropbox_id = (SELECT dropbox_id FROM pickup_waste WHERE pickup_id = NEW.pickup_id);
     ELSE
         UPDATE dropbox

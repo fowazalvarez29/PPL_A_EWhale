@@ -4,7 +4,7 @@ CREATE FUNCTION funct_phone(phone_input VARCHAR(15))
 RETURNS TINYINT(1)
 DETERMINISTIC
 BEGIN
-    -- Menggunakan regex untuk memastikan input hanya terdiri dari angka 0-9
+    -- Memastikan input hanya terdiri dari angka 0-9
     DECLARE is_valid TINYINT(1) DEFAULT 0;
 
     IF phone_input REGEXP '^[0-9]+$' THEN

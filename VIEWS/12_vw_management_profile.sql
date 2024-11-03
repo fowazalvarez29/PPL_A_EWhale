@@ -8,7 +8,7 @@ SELECT
     m.address,
     m.photo,
     CASE 
-        WHEN m.is_active = 1 THEN 'YES' 
+        WHEN m.is_verified = 1 THEN 'YES' 
         ELSE 'NO' 
     END AS is_active,
     CASE 

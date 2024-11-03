@@ -5,12 +5,12 @@ CREATE TABLE community (
     community_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    phone VARCHAR(15),
+    password VARCHAR(255),
+    phone VARCHAR(15) UNIQUE NOT NULL,
     date_of_birth DATE,
     address VARCHAR(255),
     photo VARCHAR(255),
-    is_verified TINYINT(1) DEFAULT 0, -- 0 = belum terverifikasi, 1 = terverifikasi
+    is_verified TINYINT(1) DEFAULT 0,
     otp_code VARCHAR(6),
     otp_expiry TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -22,17 +22,17 @@ CREATE TABLE courier (
     courier_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    phone VARCHAR(15),
+    password VARCHAR(255),
+    phone VARCHAR(15) UNIQUE NOT NULL,
     date_of_birth DATE,
     address VARCHAR(255),
     account_number VARCHAR(50),
-    nik VARCHAR(20) UNIQUE,
+    nik VARCHAR(16) UNIQUE,
     ktp_url VARCHAR(255),
     kk_url VARCHAR(255),
     photo VARCHAR(255),
-    is_verified TINYINT(1) DEFAULT 0, -- 0 = belum terverifikasi, 1 = terverifikasi
-    is_active TINYINT(1) DEFAULT 1, -- 0 = tidak aktif, 1 = aktif
+    is_verified TINYINT(1) DEFAULT 0, -- 0 = FALSE 1 = TRUE
+    status ENUM('Pending','Approved', 'Reject') DEFAULT 'Pending',
     otp_code VARCHAR(6),
     otp_expiry TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -44,13 +44,15 @@ CREATE TABLE management (
     management_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(50),
     date_of_birth DATE,
     address VARCHAR(255),
-    phone VARCHAR(15),
+    phone VARCHAR(15) UNIQUE NOT NULL,
     photo VARCHAR(255),
-    is_active TINYINT(1) DEFAULT 1, -- 0 = tidak aktif, 1 = aktif
+    is_verified TINYINT(1) DEFAULT 0,
     is_admin TINYINT(1) DEFAULT 0, -- 0 = Management, 1 = Admin
+    otp_code VARCHAR(6),
+    otp_expiry TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -61,9 +63,10 @@ CREATE TABLE dropbox (
     dropbox_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     address VARCHAR(255) NOT NULL,
+    district_address ENUM('Bandung Utara', 'Bandung Selatan', 'Bandung Timur', 'Bandung Barat', 'Cimahi', 'Kabupaten Bandung', 'Kabupaten Bandung Barat') DEFAULT NULL,
     longitude DECIMAL(11, 8),
     latitude DECIMAL(11, 8),
-    capacity INT DEFAULT 0 CHECK (capacity BETWEEN 0 AND 1000),
+    capacity INT DEFAULT 0 CHECK (capacity BETWEEN 0 AND 150), -- Sesuai dengan jumlah permintaan transaksi
     status ENUM('Full', 'Available') DEFAULT 'Available',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -72,7 +75,8 @@ CREATE TABLE dropbox (
 -- Tabel waste_type untuk data jenis dan kategori sampah elektronik
 CREATE TABLE waste_type (
     waste_type_id INT AUTO_INCREMENT PRIMARY KEY,
-    waste_type_name VARCHAR(255) NOT NULL,
+    waste_type_name ENUM('Large Household Apllience','Small Household Appliances','IT Equipment','Lamps','Toys','Screens and Monitors','Other Electronic Devices') NOT NULL,
+    image VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -81,7 +85,6 @@ CREATE TABLE waste_type (
 CREATE TABLE waste (
     waste_id INT AUTO_INCREMENT PRIMARY KEY,
     waste_name VARCHAR(255) NOT NULL,
-    category VARCHAR(50) NOT NULL,
     point INT DEFAULT 0 CHECK (point >= 0),
     waste_type_id INT,
     image VARCHAR(255),
@@ -96,10 +99,9 @@ CREATE TABLE pickup_waste (
     pickup_id INT AUTO_INCREMENT PRIMARY KEY,
     pickup_date DATE NOT NULL,
     pickup_address VARCHAR(255) NOT NULL,
-    district_address ENUM('Bandung Utara', 'Bandung Selatan', 'Bandung Timur', 'Bandung Barat', 'Cimahi', 'Kabupaten Bandung', 'Kabupaten Bandung Barat') DEFAULT NULL,
     pickup_status ENUM('pending', 'accepted', 'completed', 'cancelled') DEFAULT 'pending',
     dropbox_id INT,
-    courier_id INT,
+    courier_id INT DEFAULT NULL,
     community_id INT,
     management_id INT DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

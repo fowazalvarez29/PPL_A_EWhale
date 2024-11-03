@@ -14,28 +14,21 @@ BEGIN
     DECLARE phone_valid TINYINT(1);
     DECLARE email_exists INT;
 
-    -- Check email format
-    SET email_valid = func_email_format(p_email);
+    SET email_valid = funct_email_format(p_email);
     IF email_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid email format';
     END IF;
 
-    -- Check phone format
-    SET phone_valid = func_phone(p_phone);
+    SET phone_valid = funct_phone(p_phone);
     IF phone_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
     END IF;
 
-    -- Check if email jika sudah ada
-    SELECT COUNT(*) INTO email_exists
-    FROM community
-    WHERE email = p_email;
-    
+    SELECT COUNT(*) INTO email_exists FROM community WHERE email = p_email;
     IF email_exists > 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email is already registered';
     END IF;
 
-    -- Insert new community jika semua CHECK terpenuhi
     INSERT INTO community (
         name, email, password, phone, date_of_birth, address,
         photo, is_verified, created_at, updated_at
@@ -49,11 +42,11 @@ DELIMITER ;
 
 -- Contoh pemanggilan
 CALL register_community(
-    'Amran', -- name
-    'amran@example.com', -- email (unique)
-    'securepassword', -- password
-    '081234567891', -- phone
-    '1990-08-20', -- date of birth
-    'Bougenville 7, Bandung', -- address
-    'http://example.com/photo.jpg' -- photo (boleh null)
+    'Jane Doe',                 -- p_name
+    'janedoe@email.com',        -- p_email
+    'securepassword',           -- p_password
+    '081234567891',             -- p_phone
+    '1995-08-22',               -- p_date_of_birth
+    'Jl. Merdeka No. 2',        -- p_address
+    NULL                        -- p_photo
 );

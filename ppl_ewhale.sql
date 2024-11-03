@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: ppl_transaction
+-- Host: 127.0.0.1    Database: ppl_coba1
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
@@ -26,7 +26,7 @@ CREATE TABLE `community` (
   `community_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE `community` (
 
 LOCK TABLES `community` WRITE;
 /*!40000 ALTER TABLE `community` DISABLE KEYS */;
-INSERT INTO `community` VALUES (1,'Indri','indri@email.com','password1','08123456101','2000-01-01','Sumarecon',NULL,1,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(2,'Agam','agam@email.com','password2','08123456102','2000-01-01','Tahura',NULL,0,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(3,'Agung','agung@email.com','password3','08123456103','2000-01-01','Cihampelas',NULL,1,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(4,'Adit','adit@email.com','password4','08123456104','2000-01-01','Cimahi',NULL,1,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(5,'Gilman','gilman@email.com','password5','08123456105','2000-01-01','Cileunyi',NULL,0,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06');
+INSERT INTO `community` VALUES (1,'Indri','indri@email.com','password1','08123456101','2000-01-01','Sumarecon',NULL,1,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(2,'Agam','agam@email.com','password2','08123456102','2000-01-01','Tahura',NULL,0,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(3,'Agung','agung@email.com','password3','08123456103','2000-01-01','Cihampelas',NULL,1,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(4,'Adit','adit@email.com','password4','08123456104','2000-01-01','Cimahi',NULL,1,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(5,'Gilman','gilman@email.com','password5','08123456105','2000-01-01','Cileunyi',NULL,0,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17');
 /*!40000 ALTER TABLE `community` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,17 +91,17 @@ CREATE TABLE `courier` (
   `courier_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `account_number` varchar(50) DEFAULT NULL,
-  `nik` varchar(20) DEFAULT NULL,
+  `nik` varchar(16) DEFAULT NULL,
   `ktp_url` varchar(255) DEFAULT NULL,
   `kk_url` varchar(255) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `is_verified` tinyint(1) DEFAULT '0',
-  `is_active` tinyint(1) DEFAULT '1',
+  `status` enum('Pending','Approved','Reject') DEFAULT 'Pending',
   `otp_code` varchar(6) DEFAULT NULL,
   `otp_expiry` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -118,7 +118,7 @@ CREATE TABLE `courier` (
 
 LOCK TABLES `courier` WRITE;
 /*!40000 ALTER TABLE `courier` DISABLE KEYS */;
-INSERT INTO `courier` VALUES (1,'Haykal','haykal@email.com','password1','08123456701','2000-01-01','Address 1','1234567891','1234567890123451',NULL,NULL,NULL,1,1,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(2,'Faqih','faqih@email.com','password2','08123456702','2000-01-01','Address 2','1234567892','1234567890123452',NULL,NULL,NULL,0,1,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(3,'Fowaz','fowaz@email.com','password3','08123456703','2000-01-01','Address 3','1234567893','1234567890123453',NULL,NULL,NULL,1,1,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(4,'Daffa','daffa@email.com','password4','08123456704','2000-01-01','Address 4','1234567894','1234567890123454',NULL,NULL,NULL,1,0,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(5,'Ardhi','ardhi@email.com','password5','08123456705','2000-01-01','Address 5','1234567895','1234567890123455',NULL,NULL,NULL,1,1,NULL,NULL,'2024-11-03 09:41:06','2024-11-03 09:41:06');
+INSERT INTO `courier` VALUES (1,'Haykal','haykal@email.com','password1','08123456701','2000-01-01','Address 1','1234567891','1234567890123451',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(2,'Faqih','faqih@email.com','password2','08123456702','2000-01-01','Address 2','1234567892','1234567890123452',NULL,NULL,NULL,0,'Pending',NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(3,'Fowaz','fowaz@email.com','password3','08123456703','2000-01-01','Address 3','1234567893','1234567890123453',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(4,'Daffa','daffa@email.com','password4','08123456704','2000-01-01','Address 4','1234567894','1234567890123454',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(5,'Ardhi','ardhi@email.com','password5','08123456705','2000-01-01','Address 5','1234567895','1234567890123455',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17');
 /*!40000 ALTER TABLE `courier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,6 +162,7 @@ CREATE TABLE `dropbox` (
   `dropbox_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `address` varchar(255) NOT NULL,
+  `district_address` enum('Bandung Utara','Bandung Selatan','Bandung Timur','Bandung Barat','Cimahi','Kabupaten Bandung','Kabupaten Bandung Barat') DEFAULT NULL,
   `longitude` decimal(11,8) DEFAULT NULL,
   `latitude` decimal(11,8) DEFAULT NULL,
   `capacity` int DEFAULT '0',
@@ -169,8 +170,8 @@ CREATE TABLE `dropbox` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`dropbox_id`),
-  CONSTRAINT `dropbox_chk_1` CHECK ((`capacity` between 0 and 1000))
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `dropbox_chk_1` CHECK ((`capacity` between 0 and 150))
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +180,7 @@ CREATE TABLE `dropbox` (
 
 LOCK TABLES `dropbox` WRITE;
 /*!40000 ALTER TABLE `dropbox` DISABLE KEYS */;
-INSERT INTO `dropbox` VALUES (1,'Dropbox 1','Bandung Utara',106.84559900,-6.20876300,1000,'Full','2024-11-03 09:41:06','2024-11-03 10:43:14'),(2,'Dropbox 2','Bandung Selatan',106.84560000,-6.20876400,750,'Available','2024-11-03 09:41:06','2024-11-03 09:41:06'),(3,'Dropbox 3','Bandung Timur',106.84560100,-6.20876500,250,'Available','2024-11-03 09:41:06','2024-11-03 09:41:06'),(4,'Dropbox 4','Bandung Barat',106.84560200,-6.20876600,1000,'Full','2024-11-03 09:41:06','2024-11-03 09:41:06'),(5,'Dropbox 5','Cimahi',106.84560300,-6.20876700,610,'Available','2024-11-03 09:41:06','2024-11-03 09:57:08');
+INSERT INTO `dropbox` VALUES (1,'Dropbox 1','Jl. Example No.1','Bandung Utara',106.84559900,-6.20876300,0,'Available','2024-11-03 14:23:17','2024-11-03 15:54:42'),(2,'Dropbox 2','Jl. Example No.2','Bandung Selatan',106.84560000,-6.20876400,0,'Available','2024-11-03 14:23:17','2024-11-03 15:54:52'),(3,'Dropbox 3','Jl. Example No.3','Bandung Timur',106.84560100,-6.20876500,0,'Available','2024-11-03 14:23:17','2024-11-03 15:55:00'),(4,'Dropbox 4','Jl. Example No.4','Bandung Barat',106.84560200,-6.20876600,150,'Full','2024-11-03 14:23:17','2024-11-03 14:23:17');
 /*!40000 ALTER TABLE `dropbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,13 +195,15 @@ CREATE TABLE `management` (
   `management_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(50) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT '1',
+  `is_verified` tinyint(1) DEFAULT '0',
   `is_admin` tinyint(1) DEFAULT '0',
+  `otp_code` varchar(6) DEFAULT NULL,
+  `otp_expiry` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`management_id`),
@@ -214,7 +217,7 @@ CREATE TABLE `management` (
 
 LOCK TABLES `management` WRITE;
 /*!40000 ALTER TABLE `management` DISABLE KEYS */;
-INSERT INTO `management` VALUES (1,'Lutfi','lutfi@email.com','password1','2000-05-15','Jl. Mawar No. 1',NULL,NULL,1,1,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(2,'Fauzi','fauzi@email.com','password2','2000-08-22','Jl. Melati No. 2',NULL,NULL,1,0,'2024-11-03 09:41:06','2024-11-03 09:41:06'),(3,'Malwi','malwi@email.com','password3','2000-12-10','Jl. Anggrek No. 3',NULL,NULL,1,0,'2024-11-03 09:41:06','2024-11-03 09:41:06');
+INSERT INTO `management` VALUES (1,'Lutfi','lutfi@email.com','password1','2000-05-15','Jl. Mawar No. 1',NULL,NULL,1,1,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(2,'Fauzi','fauzi@email.com','password2','2000-08-22','Jl. Melati No. 2',NULL,NULL,1,0,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(3,'Malwi','malwi@email.com','password3','2000-12-10','Jl. Anggrek No. 3',NULL,NULL,1,0,NULL,NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17');
 /*!40000 ALTER TABLE `management` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +259,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_pickup_detail` BEFORE INSERT ON `pickup_detail` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_pickup_detail_total_points` BEFORE INSERT ON `pickup_detail` FOR EACH ROW BEGIN
     DECLARE waste_point INT;
 
     -- Mendapatkan point dari tabel waste berdasarkan waste_id yang dimasukkan
@@ -290,9 +293,9 @@ DELIMITER ;;
     WHERE dropbox_id = (SELECT dropbox_id FROM pickup_waste WHERE pickup_id = NEW.pickup_id);
 
     -- Memperbarui kapasitas dan status pada tabel dropbox
-    IF new_capacity >= 1000 THEN
+    IF new_capacity >= 100 THEN
         UPDATE dropbox
-        SET capacity = 1000, status = 'Full'
+        SET capacity = 100, status = 'Full'
         WHERE dropbox_id = (SELECT dropbox_id FROM pickup_waste WHERE pickup_id = NEW.pickup_id);
     ELSE
         UPDATE dropbox
@@ -317,7 +320,6 @@ CREATE TABLE `pickup_waste` (
   `pickup_id` int NOT NULL AUTO_INCREMENT,
   `pickup_date` date NOT NULL,
   `pickup_address` varchar(255) NOT NULL,
-  `district_address` enum('Bandung Utara','Bandung Selatan','Bandung Timur','Bandung Barat','Cimahi','Kabupaten Bandung','Kabupaten Bandung Barat') DEFAULT NULL,
   `pickup_status` enum('pending','accepted','completed','cancelled') DEFAULT 'pending',
   `dropbox_id` int DEFAULT NULL,
   `courier_id` int DEFAULT NULL,
@@ -345,37 +347,6 @@ LOCK TABLES `pickup_waste` WRITE;
 /*!40000 ALTER TABLE `pickup_waste` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pickup_waste` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_check_courier_community_status` BEFORE INSERT ON `pickup_waste` FOR EACH ROW BEGIN
-    -- Periksa apakah courier memenuhi syarat
-    IF NEW.courier_id IS NOT NULL THEN
-        IF NOT is_courier_verified_and_active(NEW.courier_id) THEN
-            SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'Courier Not Verified or Active!';
-        END IF;
-    END IF;
-
-    -- Periksa apakah community memenuhi syarat
-    IF NEW.community_id IS NOT NULL THEN
-        IF NOT is_community_verified(NEW.community_id) THEN
-            SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = "You're Not Verified!";
-        END IF;
-    END IF;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -416,7 +387,7 @@ DELIMITER ;;
     -- Cek jika status baru adalah 'completed'
     IF NEW.pickup_status = 'completed' THEN
         -- Menghitung total poin dari pickup_detail untuk pickup yang selesai
-        SELECT SUM(points) INTO total_points
+        SELECT COALESCE(SUM(points), 0) INTO total_points
         FROM pickup_detail
         WHERE pickup_id = NEW.pickup_id;
 
@@ -424,14 +395,14 @@ DELIMITER ;;
         IF NEW.community_id IS NOT NULL THEN
             INSERT INTO community_points (community_id, total_points)
             VALUES (NEW.community_id, total_points)
-            ON DUPLICATE KEY UPDATE total_points = total_points + VALUES(total_points);
+            ON DUPLICATE KEY UPDATE total_points = community_points.total_points + VALUES(total_points);
         END IF;
 
         -- Update total waste untuk courier
         IF NEW.courier_id IS NOT NULL THEN
             INSERT INTO courier_points (courier_id, total_points)
             VALUES (NEW.courier_id, total_points)
-            ON DUPLICATE KEY UPDATE total_points = total_points + VALUES(total_points);
+            ON DUPLICATE KEY UPDATE total_points = courier_points.total_points + VALUES(total_points);
         END IF;
     END IF;
 END */;;
@@ -440,6 +411,26 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Temporary view structure for view `view_total_pickup_history`
+--
+
+DROP TABLE IF EXISTS `view_total_pickup_history`;
+/*!50001 DROP VIEW IF EXISTS `view_total_pickup_history`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `view_total_pickup_history` AS SELECT 
+ 1 AS `pickup_id`,
+ 1 AS `pickup_date`,
+ 1 AS `pickup_address`,
+ 1 AS `pickup_status`,
+ 1 AS `Drop Box Name`,
+ 1 AS `district_address`,
+ 1 AS `waste_type_name`,
+ 1 AS `total_quantity`,
+ 1 AS `total_points`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `vw_community_profile`
@@ -484,7 +475,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `kk_url`,
  1 AS `photo`,
  1 AS `is_verified`,
- 1 AS `is_active`,
+ 1 AS `status`,
  1 AS `total_points_collected`,
  1 AS `created_at`,
  1 AS `updated_at`*/;
@@ -513,38 +504,6 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary view structure for view `vw_pickup_history`
---
-
-DROP TABLE IF EXISTS `vw_pickup_history`;
-/*!50001 DROP VIEW IF EXISTS `vw_pickup_history`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `vw_pickup_history` AS SELECT 
- 1 AS `pickup_id`,
- 1 AS `pickup_date`,
- 1 AS `pickup_address`,
- 1 AS `district_address`,
- 1 AS `pickup_status`,
- 1 AS `dropbox_name`,
- 1 AS `courier_name`,
- 1 AS `community_name`*/;
-SET character_set_client = @saved_cs_client;
-
---
--- Temporary view structure for view `vw_top_10_communities`
---
-
-DROP TABLE IF EXISTS `vw_top_10_communities`;
-/*!50001 DROP VIEW IF EXISTS `vw_top_10_communities`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `vw_top_10_communities` AS SELECT 
- 1 AS `community_name`,
- 1 AS `total_pickups`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Temporary view structure for view `vw_top_10_couriers`
 --
 
@@ -553,6 +512,7 @@ DROP TABLE IF EXISTS `vw_top_10_couriers`;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `vw_top_10_couriers` AS SELECT 
+ 1 AS `courier_id`,
  1 AS `courier_name`,
  1 AS `total_pickups`*/;
 SET character_set_client = @saved_cs_client;
@@ -592,7 +552,7 @@ DROP TABLE IF EXISTS `vw_total_waste_points_per_category`;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `vw_total_waste_points_per_category` AS SELECT 
- 1 AS `category`,
+ 1 AS `waste_type_name`,
  1 AS `total_waste_collected`,
  1 AS `total_points_collected`*/;
 SET character_set_client = @saved_cs_client;
@@ -636,8 +596,8 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50001 CREATE VIEW `vw_waste_type_category` AS SELECT 
  1 AS `id`,
  1 AS `Name`,
- 1 AS `Category`,
- 1 AS `Waste Type`*/;
+ 1 AS `Waste Type`,
+ 1 AS `Description`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -650,7 +610,6 @@ DROP TABLE IF EXISTS `waste`;
 CREATE TABLE `waste` (
   `waste_id` int NOT NULL AUTO_INCREMENT,
   `waste_name` varchar(255) NOT NULL,
-  `category` varchar(50) NOT NULL,
   `point` int DEFAULT '0',
   `waste_type_id` int DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -661,7 +620,7 @@ CREATE TABLE `waste` (
   KEY `waste_type_id` (`waste_type_id`),
   CONSTRAINT `waste_ibfk_1` FOREIGN KEY (`waste_type_id`) REFERENCES `waste_type` (`waste_type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `waste_chk_1` CHECK ((`point` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -670,7 +629,7 @@ CREATE TABLE `waste` (
 
 LOCK TABLES `waste` WRITE;
 /*!40000 ALTER TABLE `waste` DISABLE KEYS */;
-INSERT INTO `waste` VALUES (1,'Lithium Battery','Battery',10,1,NULL,'Lithium-based battery used in electronics','2024-11-03 09:41:15','2024-11-03 09:41:15'),(2,'Alkaline Battery','Battery',8,1,NULL,'Common household battery','2024-11-03 09:41:15','2024-11-03 09:41:15'),(3,'Car Battery','Battery',15,1,NULL,'Large lead-acid battery used in vehicles','2024-11-03 09:41:15','2024-11-03 09:41:15'),(4,'Smartphone','Mobile Device',20,2,NULL,'Used or broken smartphone','2024-11-03 09:41:15','2024-11-03 09:41:15'),(5,'Feature Phone','Mobile Device',10,2,NULL,'Non-smartphone mobile device','2024-11-03 09:41:15','2024-11-03 09:41:15'),(6,'Tablet','Mobile Device',25,2,NULL,'Tablet device used for browsing and media','2024-11-03 09:41:15','2024-11-03 09:41:15'),(7,'Desktop Computer','Computer',30,3,NULL,'Full desktop computer setup','2024-11-03 09:41:15','2024-11-03 09:41:15'),(8,'Laptop','Computer',25,3,NULL,'Portable computer device','2024-11-03 09:41:15','2024-11-03 09:41:15'),(9,'PC Monitor','Computer',15,3,NULL,'Computer display monitor','2024-11-03 09:41:15','2024-11-03 09:41:15'),(10,'CRT TV','Television',20,4,NULL,'Old-style CRT television','2024-11-03 09:41:15','2024-11-03 09:41:15'),(11,'LED TV','Television',30,4,NULL,'Modern LED television','2024-11-03 09:41:15','2024-11-03 09:41:15'),(12,'Plasma TV','Television',25,4,NULL,'Older plasma screen television','2024-11-03 09:41:15','2024-11-03 09:41:15'),(13,'Microwave','Small Appliance',15,5,NULL,'Kitchen microwave appliance','2024-11-03 09:41:15','2024-11-03 09:41:15'),(14,'Blender','Small Appliance',10,5,NULL,'Kitchen blender for food preparation','2024-11-03 09:41:15','2024-11-03 09:41:15'),(15,'Toaster','Small Appliance',8,5,NULL,'Small kitchen appliance for toasting bread','2024-11-03 09:41:15','2024-11-03 09:41:15');
+INSERT INTO `waste` VALUES (1,'Washing Machine',50,1,NULL,'Large household appliance for washing clothes','2024-11-03 14:26:36','2024-11-03 14:26:36'),(2,'Hand Blender',10,2,NULL,'Compact blender for small-scale food preparation','2024-11-03 14:26:36','2024-11-03 14:26:36'),(3,'Laptop',25,3,NULL,'Portable computer device for work and entertainment','2024-11-03 14:26:36','2024-11-03 14:26:36'),(4,'LED Lamp',5,4,NULL,'Energy-saving fluorescent lighting device','2024-11-03 14:26:36','2024-11-03 14:26:36'),(5,'Electronic Toy Car',8,5,NULL,'Battery-powered electronic toy car for children','2024-11-03 14:26:36','2024-11-03 14:26:36'),(6,'LCD Monitor',20,6,NULL,'LCD monitor for computer displays','2024-11-03 14:26:36','2024-11-03 14:26:36'),(7,'Digital Camera',15,7,NULL,'Portable digital camera for capturing photos','2024-11-03 14:26:36','2024-11-03 14:26:36');
 /*!40000 ALTER TABLE `waste` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,11 +642,12 @@ DROP TABLE IF EXISTS `waste_type`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `waste_type` (
   `waste_type_id` int NOT NULL AUTO_INCREMENT,
-  `waste_type_name` varchar(255) NOT NULL,
+  `waste_type_name` enum('Large Household Apllience','Small Household Appliances','IT Equipment','Lamps','Toys','Screens and Monitors','Other Electronic Devices') NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`waste_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -696,16 +656,16 @@ CREATE TABLE `waste_type` (
 
 LOCK TABLES `waste_type` WRITE;
 /*!40000 ALTER TABLE `waste_type` DISABLE KEYS */;
-INSERT INTO `waste_type` VALUES (1,'Batteries','2024-11-03 09:41:06','2024-11-03 09:41:06'),(2,'Mobile Phones','2024-11-03 09:41:06','2024-11-03 09:41:06'),(3,'Computers','2024-11-03 09:41:06','2024-11-03 09:41:06'),(4,'Televisions','2024-11-03 09:41:06','2024-11-03 09:41:06'),(5,'Small Appliances','2024-11-03 09:41:06','2024-11-03 09:41:06');
+INSERT INTO `waste_type` VALUES (1,'Large Household Apllience',NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(2,'Small Household Appliances',NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(3,'IT Equipment',NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(4,'Lamps',NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(5,'Toys',NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(6,'Screens and Monitors',NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17'),(7,'Other Electronic Devices',NULL,'2024-11-03 14:23:17','2024-11-03 14:23:17');
 /*!40000 ALTER TABLE `waste_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'ppl_transaction'
+-- Dumping events for database 'ppl_coba1'
 --
 
 --
--- Dumping routines for database 'ppl_transaction'
+-- Dumping routines for database 'ppl_coba1'
 --
 /*!50003 DROP FUNCTION IF EXISTS `check_dropbox_capacity` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -781,7 +741,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` FUNCTION `funct_phone`(phone_input VARCHAR(15)) RETURNS tinyint(1)
     DETERMINISTIC
 BEGIN
-    -- Menggunakan regex untuk memastikan input hanya terdiri dari angka 0-9
+    -- Memastikan input hanya terdiri dari angka 0-9
     DECLARE is_valid TINYINT(1) DEFAULT 0;
 
     IF phone_input REGEXP '^[0-9]+$' THEN
@@ -789,65 +749,6 @@ BEGIN
     END IF;
 
     RETURN is_valid;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP FUNCTION IF EXISTS `is_community_verified` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `is_community_verified`(communityId INT) RETURNS tinyint(1)
-    DETERMINISTIC
-BEGIN
-    DECLARE verified TINYINT;
-
-    -- Pastikan query hanya mengembalikan satu baris
-    SELECT is_verified INTO verified
-    FROM community
-    WHERE community_id = communityId
-    LIMIT 1;
-
-    -- Kembalikan TRUE jika community terverifikasi
-    RETURN (verified = 1);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP FUNCTION IF EXISTS `is_courier_verified_and_active` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `is_courier_verified_and_active`(courierId INT) RETURNS tinyint(1)
-    DETERMINISTIC
-BEGIN
-    DECLARE verified TINYINT;
-    DECLARE active TINYINT;
-
-    -- Pastikan query hanya mengembalikan satu baris
-    SELECT is_verified, is_active INTO verified, active
-    FROM courier
-    WHERE courier_id = courierId
-    LIMIT 1;
-
-    -- Kembalikan TRUE jika courier terverifikasi dan aktif
-    RETURN (verified = 1 AND active = 1);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -867,7 +768,6 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `add_pickup_waste`(
     IN p_pickup_date DATE,
     IN p_pickup_address VARCHAR(255),
-    IN p_district_address ENUM('Bandung Utara', 'Bandung Selatan', 'Bandung Timur', 'Bandung Barat', 'Cimahi', 'Kabupaten Bandung', 'Kabupaten Bandung Barat'),
     IN p_dropbox_id INT,
     IN p_courier_id INT,
     IN p_community_id INT
@@ -876,41 +776,52 @@ BEGIN
     DECLARE dropbox_capacity INT;
     DECLARE courier_verified TINYINT(1);
     DECLARE community_verified TINYINT(1);
+    DECLARE dropbox_exists INT;
+    DECLARE courier_exists INT;
+    DECLARE community_exists INT;
 
+    -- 1. Check if the dropbox exists
+    SELECT COUNT(*) INTO dropbox_exists
+    FROM dropbox
+    WHERE dropbox_id = p_dropbox_id;
 
-    -- 1. Check apakah drop box full?
+    IF dropbox_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox does not exist!';
+    END IF;
+
+    -- 2. Check if the dropbox is full
     SELECT capacity INTO dropbox_capacity
     FROM dropbox
     WHERE dropbox_id = p_dropbox_id;
 
-    IF dropbox_capacity >= 1000 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Drop box is full!';
+    IF dropbox_capacity >= 100 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox is full!';
     END IF;
 
-    -- 2. Verifikasi kurir apakah verified?
-    SELECT is_verified INTO courier_verified
+    -- 3. Check if the courier exists and is verified and active
+    SELECT COUNT(*) INTO courier_exists
     FROM courier
-    WHERE courier_id = p_courier_id AND is_active = 1;
+    WHERE courier_id = p_courier_id AND is_verified = 1 AND status = 'Approved';
 
-    IF courier_verified = 0 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Courier is not verified or inactive!';
+    IF courier_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Courier is not verified or approved!';
     END IF;
 
-    -- 3. Verifikasi community apakah verified?
-    SELECT is_verified INTO community_verified
+    -- 4. Check if the community exists and is verified
+    SELECT COUNT(*) INTO community_exists
     FROM community
-    WHERE community_id = p_community_id;
+    WHERE community_id = p_community_id AND is_verified = 1;
 
-    IF community_verified = 0 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Community is not verified!';
+    IF community_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Community is not verified!';
     END IF;
 
-    -- 4. Insert data into pickup_waste jika semua kondisi terpenuhi
-    INSERT INTO pickup_waste (pickup_date, pickup_address, district_address, dropbox_id, courier_id, community_id, pickup_status)
-    VALUES (p_pickup_date, p_pickup_address, p_district_address, p_dropbox_id, p_courier_id, p_community_id, 'pending');
+    -- 5. Insert data into pickup_waste if all conditions are met
+    INSERT INTO pickup_waste (
+        pickup_date, pickup_address, dropbox_id, courier_id, community_id, pickup_status
+    ) VALUES (
+        p_pickup_date, p_pickup_address, p_dropbox_id, p_courier_id, p_community_id, 'pending'
+    );
 
 END ;;
 DELIMITER ;
@@ -942,28 +853,21 @@ BEGIN
     DECLARE phone_valid TINYINT(1);
     DECLARE email_exists INT;
 
-    -- Check email format
-    SET email_valid = func_email_format(p_email);
+    SET email_valid = funct_email_format(p_email);
     IF email_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid email format';
     END IF;
 
-    -- Check phone format
-    SET phone_valid = func_phone(p_phone);
+    SET phone_valid = funct_phone(p_phone);
     IF phone_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
     END IF;
 
-    -- Check if email jika sudah ada
-    SELECT COUNT(*) INTO email_exists
-    FROM community
-    WHERE email = p_email;
-    
+    SELECT COUNT(*) INTO email_exists FROM community WHERE email = p_email;
     IF email_exists > 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email is already registered';
     END IF;
 
-    -- Insert new community jika semua CHECK terpenuhi
     INSERT INTO community (
         name, email, password, phone, date_of_birth, address,
         photo, is_verified, created_at, updated_at
@@ -1004,46 +908,35 @@ BEGIN
     DECLARE email_valid TINYINT(1);
     DECLARE phone_valid TINYINT(1);
     DECLARE email_exists INT;
-    -- DECLARE phone_exists INT;
+    DECLARE phone_exists INT;
 
-    -- Check email format
-    SET email_valid = func_email_format(p_email);
+    SET email_valid = funct_email_format(p_email);
     IF email_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid email format';
     END IF;
 
-    -- Check phone format
-    SET phone_valid = func_phone(p_phone);
+    SET phone_valid = funct_phone(p_phone);
     IF phone_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
     END IF;
 
-    -- Check if email already exists
-    SELECT COUNT(*) INTO email_exists
-    FROM courier
-    WHERE email = p_email;
-    
+    SELECT COUNT(*) INTO email_exists FROM courier WHERE email = p_email;
     IF email_exists > 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email is already registered';
     END IF;
 
-    -- Check if phone number already exists
-    -- SELECT COUNT(*) INTO phone_exists
-    -- FROM courier
-    -- WHERE phone = p_phone;
+    SELECT COUNT(*) INTO phone_exists FROM courier WHERE phone = p_phone;
+    IF phone_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number is already registered';
+    END IF;
 
-    -- IF phone_exists > 0 THEN
-    --     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number is already registered';
-    -- END IF;
-
-    -- Insert new courier if all checks pass
     INSERT INTO courier (
         name, email, password, phone, date_of_birth, address,
-        nik, account_number, ktp_url, kk_url, photo, is_verified, is_active,
+        nik, account_number, ktp_url, kk_url, photo, is_verified, status,
         created_at, updated_at
     ) VALUES (
         p_name, p_email, p_password, p_phone, p_date_of_birth, p_address,
-        p_nik, p_account_number, p_ktp_url, p_kk_url, p_photo, 0, 1,
+        p_nik, p_account_number, p_ktp_url, p_kk_url, p_photo, 0, 'pending',
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
     );
 END ;;
@@ -1064,16 +957,17 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `register_dropbox`(
     IN p_name VARCHAR(50),
-    IN p_address VARCHAR(50),
-    IN p_longitude VARCHAR(255),
-    IN p_latitude VARCHAR(255),
+    IN p_address VARCHAR(255),
+    IN p_district_address ENUM('Bandung Utara', 'Bandung Selatan', 'Bandung Timur', 'Bandung Barat', 'Cimahi', 'Kabupaten Bandung', 'Kabupaten Bandung Barat'),
+    IN p_longitude DECIMAL(11,8),
+    IN p_latitude DECIMAL(11,8),
     IN p_capacity INT
 )
 BEGIN
     DECLARE name_exists INT;
     DECLARE address_exists INT;
 
-    -- Check if dropbox name already exists
+    -- Cek jika nama dropbox sudah ada
     SELECT COUNT(*) INTO name_exists
     FROM dropbox
     WHERE name = p_name;
@@ -1082,7 +976,7 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox name is already registered';
     END IF;
 
-    -- Check if dropbox address already exists
+    -- Cek jika alamat dropbox sudah ada
     SELECT COUNT(*) INTO address_exists
     FROM dropbox
     WHERE address = p_address;
@@ -1091,12 +985,16 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox address is already registered';
     END IF;
 
-    -- Insert new dropbox record if all checks pass
+    -- Pastikan kapasitas antara 0-100, jika tidak atur ke default 0
+    IF p_capacity < 0 OR p_capacity > 100 THEN
+        SET p_capacity = 0;
+    END IF;
+
+    -- Insert data dropbox baru jika semua pemeriksaan lolos
     INSERT INTO dropbox (
-        name, address, longitude, latitude, capacity, status, created_at, updated_at
+        name, address, district_address, longitude, latitude, capacity, status, created_at, updated_at
     ) VALUES (
-        p_name, p_address, p_longitude, p_latitude, 
-        IF(p_capacity BETWEEN 0 AND 1000, p_capacity, 0), -- Ensure capacity is within 0-1000
+        p_name, p_address, p_district_address, p_longitude, p_latitude, p_capacity,
         'Available', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
     );
 END ;;
@@ -1128,51 +1026,91 @@ BEGIN
     DECLARE email_valid TINYINT(1);
     DECLARE phone_valid TINYINT(1);
     DECLARE email_exists INT;
-    -- DECLARE phone_exists INT; 
+    DECLARE phone_exists INT; 
 
-    -- Check email format
-    SET email_valid = func_email_format(p_email);
+    SET email_valid = funct_email_format(p_email);
     IF email_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid email format';
     END IF;
 
-    -- Check phone format
-    SET phone_valid = func_phone(p_phone);
+    SET phone_valid = funct_phone(p_phone);
     IF phone_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
     END IF;
 
-    -- Check if email already exists
-    SELECT COUNT(*) INTO email_exists
-    FROM management
-    WHERE email = p_email;
-    
+    SELECT COUNT(*) INTO email_exists FROM management WHERE email = p_email;
     IF email_exists > 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email is already registered';
     END IF;
 
-    -- Check if phone number already exists
-    -- SELECT COUNT(*) INTO phone_exists
-    -- FROM management
-    -- WHERE phone = p_phone;
+    SELECT COUNT(*) INTO phone_exists FROM management WHERE phone = p_phone;
+    IF phone_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number is already registered';
+    END IF;
 
-    -- IF phone_exists > 0 THEN
-    --     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number is already registered';
-    -- END IF;
-
-    -- Insert new management record if all checks pass
-    -- Masukkan data ke tabel management
-        INSERT INTO management (
-            name, email, password, date_of_birth, address, phone, photo)
-        VALUES (
-            p_name, p_email, p_password, p_date_of_birth, p_address, p_phone, p_photo);
-    
+    INSERT INTO management (
+        name, email, password, date_of_birth, address, phone, photo,
+        is_verified, is_admin, created_at, updated_at
+    ) VALUES (
+        p_name, p_email, p_password, p_date_of_birth, p_address, p_phone, p_photo,
+        0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+    );
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `reset_auto_increment` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reset_auto_increment`()
+BEGIN
+    START TRANSACTION;
+
+    ALTER TABLE courier AUTO_INCREMENT = 1;
+    ALTER TABLE community AUTO_INCREMENT = 1;
+    ALTER TABLE dropbox AUTO_INCREMENT = 1;
+    ALTER TABLE management AUTO_INCREMENT = 1;
+    ALTER TABLE waste_type AUTO_INCREMENT = 1;
+    ALTER TABLE waste AUTO_INCREMENT = 1;
+    ALTER TABLE pickup_waste AUTO_INCREMENT = 1;
+    ALTER TABLE pickup_detail AUTO_INCREMENT = 1;
+    ALTER TABLE courier_points AUTO_INCREMENT = 1;
+    ALTER TABLE community_points AUTO_INCREMENT = 1;
+
+    COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `view_total_pickup_history`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_total_pickup_history`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_total_pickup_history` AS select `pw`.`pickup_id` AS `pickup_id`,`pw`.`pickup_date` AS `pickup_date`,`pw`.`pickup_address` AS `pickup_address`,`pw`.`pickup_status` AS `pickup_status`,`db`.`name` AS `Drop Box Name`,`db`.`district_address` AS `district_address`,`wt`.`waste_type_name` AS `waste_type_name`,sum(`pd`.`quantity`) AS `total_quantity`,sum(`pd`.`points`) AS `total_points` from ((((`pickup_waste` `pw` join `pickup_detail` `pd` on((`pw`.`pickup_id` = `pd`.`pickup_id`))) join `waste` `w` on((`pd`.`waste_id` = `w`.`waste_id`))) join `waste_type` `wt` on((`w`.`waste_type_id` = `wt`.`waste_type_id`))) join `dropbox` `db` on((`pw`.`dropbox_id` = `db`.`dropbox_id`))) group by `pw`.`pickup_id`,`pw`.`pickup_date`,`pw`.`pickup_address`,`pw`.`pickup_status`,`db`.`name`,`db`.`district_address`,`wt`.`waste_type_name` order by `pw`.`pickup_date` desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `vw_community_profile`
@@ -1205,7 +1143,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_courier_profile` AS select `c`.`courier_id` AS `courier_id`,`c`.`name` AS `courier_name`,`c`.`email` AS `email`,`c`.`phone` AS `phone`,`c`.`date_of_birth` AS `date_of_birth`,`c`.`address` AS `address`,`c`.`account_number` AS `account_number`,`c`.`nik` AS `nik`,`c`.`ktp_url` AS `ktp_url`,`c`.`kk_url` AS `kk_url`,`c`.`photo` AS `photo`,`c`.`is_verified` AS `is_verified`,`c`.`is_active` AS `is_active`,ifnull(`cp`.`total_points`,0) AS `total_points_collected`,`c`.`created_at` AS `created_at`,`c`.`updated_at` AS `updated_at` from (`courier` `c` left join `courier_points` `cp` on((`c`.`courier_id` = `cp`.`courier_id`))) */;
+/*!50001 VIEW `vw_courier_profile` AS select `c`.`courier_id` AS `courier_id`,`c`.`name` AS `courier_name`,`c`.`email` AS `email`,`c`.`phone` AS `phone`,`c`.`date_of_birth` AS `date_of_birth`,`c`.`address` AS `address`,`c`.`account_number` AS `account_number`,`c`.`nik` AS `nik`,`c`.`ktp_url` AS `ktp_url`,`c`.`kk_url` AS `kk_url`,`c`.`photo` AS `photo`,`c`.`is_verified` AS `is_verified`,`c`.`status` AS `status`,ifnull(`cp`.`total_points`,0) AS `total_points_collected`,`c`.`created_at` AS `created_at`,`c`.`updated_at` AS `updated_at` from (`courier` `c` left join `courier_points` `cp` on((`c`.`courier_id` = `cp`.`courier_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1223,43 +1161,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_management_profile` AS select `m`.`management_id` AS `management_id`,`m`.`name` AS `management_name`,`m`.`email` AS `email`,`m`.`phone` AS `phone`,`m`.`date_of_birth` AS `date_of_birth`,`m`.`address` AS `address`,`m`.`photo` AS `photo`,(case when (`m`.`is_active` = 1) then 'YES' else 'NO' end) AS `is_active`,(case when (`m`.`is_admin` = 1) then 'YES' else 'NO' end) AS `is_admin`,`m`.`created_at` AS `created_at`,`m`.`updated_at` AS `updated_at` from `management` `m` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `vw_pickup_history`
---
-
-/*!50001 DROP VIEW IF EXISTS `vw_pickup_history`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_pickup_history` AS select `pw`.`pickup_id` AS `pickup_id`,`pw`.`pickup_date` AS `pickup_date`,`pw`.`pickup_address` AS `pickup_address`,`pw`.`district_address` AS `district_address`,`pw`.`pickup_status` AS `pickup_status`,`d`.`name` AS `dropbox_name`,`c`.`name` AS `courier_name`,`cm`.`name` AS `community_name` from (((`pickup_waste` `pw` left join `dropbox` `d` on((`pw`.`dropbox_id` = `d`.`dropbox_id`))) left join `courier` `c` on((`pw`.`courier_id` = `c`.`courier_id`))) left join `community` `cm` on((`pw`.`community_id` = `cm`.`community_id`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `vw_top_10_communities`
---
-
-/*!50001 DROP VIEW IF EXISTS `vw_top_10_communities`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_top_10_communities` AS select `cm`.`name` AS `community_name`,count(`pw`.`pickup_id`) AS `total_pickups` from (`community` `cm` join `pickup_waste` `pw` on((`cm`.`community_id` = `pw`.`community_id`))) group by `cm`.`community_id` order by `total_pickups` desc limit 10 */;
+/*!50001 VIEW `vw_management_profile` AS select `m`.`management_id` AS `management_id`,`m`.`name` AS `management_name`,`m`.`email` AS `email`,`m`.`phone` AS `phone`,`m`.`date_of_birth` AS `date_of_birth`,`m`.`address` AS `address`,`m`.`photo` AS `photo`,(case when (`m`.`is_verified` = 1) then 'YES' else 'NO' end) AS `is_active`,(case when (`m`.`is_admin` = 1) then 'YES' else 'NO' end) AS `is_admin`,`m`.`created_at` AS `created_at`,`m`.`updated_at` AS `updated_at` from `management` `m` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1277,7 +1179,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_top_10_couriers` AS select `c`.`name` AS `courier_name`,count(`pw`.`pickup_id`) AS `total_pickups` from (`courier` `c` join `pickup_waste` `pw` on((`c`.`courier_id` = `pw`.`courier_id`))) group by `c`.`courier_id` order by `total_pickups` desc limit 10 */;
+/*!50001 VIEW `vw_top_10_couriers` AS select `c`.`courier_id` AS `courier_id`,`c`.`name` AS `courier_name`,count(`pw`.`pickup_id`) AS `total_pickups` from (`courier` `c` join `pickup_waste` `pw` on((`c`.`courier_id` = `pw`.`courier_id`))) group by `c`.`courier_id` order by `total_pickups` desc limit 10 */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1295,7 +1197,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_top_10_waste_types` AS select `w`.`waste_name` AS `waste_name`,sum(`pd`.`quantity`) AS `total_collected` from (`waste` `w` join `pickup_detail` `pd` on((`w`.`waste_id` = `pd`.`waste_id`))) group by `w`.`waste_id` order by `total_collected` desc limit 10 */;
+/*!50001 VIEW `vw_top_10_waste_types` AS select `w`.`waste_name` AS `waste_name`,coalesce(sum(`pd`.`quantity`),0) AS `total_collected` from (`waste` `w` left join `pickup_detail` `pd` on((`w`.`waste_id` = `pd`.`waste_id`))) group by `w`.`waste_id` order by `total_collected` desc limit 10 */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1331,7 +1233,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_total_waste_points_per_category` AS select `w`.`category` AS `category`,sum(`pd`.`quantity`) AS `total_waste_collected`,sum(`pd`.`points`) AS `total_points_collected` from (`pickup_detail` `pd` join `waste` `w` on((`pd`.`waste_id` = `w`.`waste_id`))) group by `w`.`category` */;
+/*!50001 VIEW `vw_total_waste_points_per_category` AS select `wt`.`waste_type_name` AS `waste_type_name`,coalesce(sum(`pd`.`quantity`),0) AS `total_waste_collected`,coalesce(sum(`pd`.`points`),0) AS `total_points_collected` from ((`waste_type` `wt` join `waste` `w` on((`wt`.`waste_type_id` = `w`.`waste_type_id`))) join `pickup_detail` `pd` on((`w`.`waste_id` = `pd`.`waste_id`))) group by `wt`.`waste_type_name` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1349,7 +1251,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_total_waste_points_per_district` AS select `pw`.`district_address` AS `district_address`,sum(`pd`.`quantity`) AS `total_waste_collected`,sum(`pd`.`points`) AS `total_points_collected` from (`pickup_waste` `pw` join `pickup_detail` `pd` on((`pw`.`pickup_id` = `pd`.`pickup_id`))) group by `pw`.`district_address` */;
+/*!50001 VIEW `vw_total_waste_points_per_district` AS select `d`.`district_address` AS `district_address`,coalesce(sum(`pd`.`quantity`),0) AS `total_waste_collected`,coalesce(sum(`pd`.`points`),0) AS `total_points_collected` from ((`dropbox` `d` left join `pickup_waste` `pw` on((`d`.`dropbox_id` = `pw`.`dropbox_id`))) left join `pickup_detail` `pd` on((`pw`.`pickup_id` = `pd`.`pickup_id`))) group by `d`.`district_address` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1367,7 +1269,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_total_waste_points_per_dropbox` AS select `d`.`name` AS `dropbox_name`,sum(`pd`.`quantity`) AS `total_waste_collected`,sum(`pd`.`points`) AS `total_points_collected` from ((`dropbox` `d` join `pickup_waste` `pw` on((`d`.`dropbox_id` = `pw`.`dropbox_id`))) join `pickup_detail` `pd` on((`pw`.`pickup_id` = `pd`.`pickup_id`))) group by `d`.`name` */;
+/*!50001 VIEW `vw_total_waste_points_per_dropbox` AS select `d`.`name` AS `dropbox_name`,coalesce(sum(`pd`.`quantity`),0) AS `total_waste_collected`,coalesce(sum(`pd`.`points`),0) AS `total_points_collected` from ((`dropbox` `d` left join `pickup_waste` `pw` on((`d`.`dropbox_id` = `pw`.`dropbox_id`))) left join `pickup_detail` `pd` on((`pw`.`pickup_id` = `pd`.`pickup_id`))) group by `d`.`name` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1385,7 +1287,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_waste_type_category` AS select `w`.`waste_id` AS `id`,`w`.`waste_name` AS `Name`,`w`.`category` AS `Category`,`wt`.`waste_type_name` AS `Waste Type` from (`waste` `w` join `waste_type` `wt` on((`w`.`waste_type_id` = `wt`.`waste_type_id`))) */;
+/*!50001 VIEW `vw_waste_type_category` AS select `w`.`waste_id` AS `id`,`w`.`waste_name` AS `Name`,`wt`.`waste_type_name` AS `Waste Type`,`w`.`description` AS `Description` from (`waste` `w` join `waste_type` `wt` on((`w`.`waste_type_id` = `wt`.`waste_type_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1399,4 +1301,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-03 17:50:14
+-- Dump completed on 2024-11-03 23:07:35

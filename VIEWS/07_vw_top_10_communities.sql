@@ -1,5 +1,6 @@
-CREATE VIEW vw_top_10_communities AS
+CREATE OR REPLACE VIEW vw_top_10_communities AS
 SELECT 
+    cm.community_id,
     cm.name AS community_name,
     COUNT(pw.pickup_id) AS total_pickups
 FROM 

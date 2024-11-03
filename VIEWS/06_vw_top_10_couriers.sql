@@ -1,5 +1,6 @@
-CREATE VIEW vw_top_10_couriers AS
+CREATE OR REPLACE VIEW vw_top_10_couriers AS
 SELECT 
+    c.courier_id,
     c.name AS courier_name,
     COUNT(pw.pickup_id) AS total_pickups
 FROM 

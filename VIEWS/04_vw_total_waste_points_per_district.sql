@@ -1,11 +1,14 @@
-CREATE VIEW vw_total_waste_points_per_district AS
+CREATE OR REPLACE VIEW vw_total_waste_points_per_district AS
 SELECT 
-    pw.district_address,
-    SUM(pd.quantity) AS total_waste_collected,
-    SUM(pd.points) AS total_points_collected
+    d.district_address,
+    COALESCE(SUM(pd.quantity), 0) AS total_waste_collected,
+    COALESCE(SUM(pd.points), 0) AS total_points_collected
 FROM 
-    pickup_waste pw
-JOIN 
+    dropbox d
+LEFT JOIN 
+    pickup_waste pw ON d.dropbox_id = pw.dropbox_id
+LEFT JOIN 
     pickup_detail pd ON pw.pickup_id = pd.pickup_id
 GROUP BY 
-    pw.district_address;
+    d.district_address;
+

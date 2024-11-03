@@ -1,10 +1,10 @@
-CREATE VIEW vw_top_10_waste_types AS
+CREATE OR REPLACE VIEW vw_top_10_waste_types AS
 SELECT 
     w.waste_name,
-    SUM(pd.quantity) AS total_collected
+    COALESCE(SUM(pd.quantity), 0) AS total_collected
 FROM 
     waste w
-JOIN 
+LEFT JOIN 
     pickup_detail pd ON w.waste_id = pd.waste_id
 GROUP BY 
     w.waste_id
