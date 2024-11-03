@@ -82,7 +82,7 @@ CREATE TABLE waste (
     waste_id INT AUTO_INCREMENT PRIMARY KEY,
     waste_name VARCHAR(255) NOT NULL,
     category VARCHAR(50) NOT NULL,
-    point INT DEFAULT 0 CHECK (point_value >= 0),
+    point INT DEFAULT 0 CHECK (point >= 0),
     waste_type_id INT,
     image VARCHAR(255),
     description TEXT,
