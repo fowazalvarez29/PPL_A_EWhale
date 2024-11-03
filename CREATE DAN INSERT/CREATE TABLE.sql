@@ -135,7 +135,7 @@ CREATE TABLE community_points (
 CREATE TABLE courier_points (
     points_id INT AUTO_INCREMENT PRIMARY KEY,
     courier_id INT UNIQUE,
-    total_waste INT DEFAULT 0 CHECK(total_waste >= 0),
+    total_points INT DEFAULT 0 CHECK(total_points >= 0),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (courier_id) REFERENCES courier(courier_id) ON UPDATE CASCADE ON DELETE CASCADE
