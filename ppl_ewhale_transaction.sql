@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 03, 2024 at 05:04 AM
+-- Generation Time: Nov 03, 2024 at 05:57 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -25,85 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `add_pickup_waste` (IN `p_pickup_date` DATE, IN `p_pickup_address` VARCHAR(255), IN `p_district_address` ENUM('Bandung Utara','Bandung Selatan','Bandung Timur','Bandung Barat','Cimahi','Kabupaten Bandung','Kabupaten Bandung Barat'), IN `p_dropbox_id` INT, IN `p_courier_id` INT, IN `p_community_id` INT)   BEGIN
-    DECLARE dropbox_capacity INT;
-    DECLARE courier_verified TINYINT(1);
-    DECLARE community_verified TINYINT(1);
-
-
-    -- 1. Check apakah drop box full?
-    SELECT capacity INTO dropbox_capacity
-    FROM dropbox
-    WHERE dropbox_id = p_dropbox_id;
-
-    IF dropbox_capacity >= 1000 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Drop box is full!';
-    END IF;
-
-    -- 2. Verifikasi kurir apakah verified?
-    SELECT is_verified INTO courier_verified
-    FROM courier
-    WHERE courier_id = p_courier_id AND is_active = 1;
-
-    IF courier_verified = 0 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Courier is not verified or inactive!';
-    END IF;
-
-    -- 3. Verifikasi community apakah verified?
-    SELECT is_verified INTO community_verified
-    FROM community
-    WHERE community_id = p_community_id;
-
-    IF community_verified = 0 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Community is not verified!';
-    END IF;
-
-    -- 4. Insert data into pickup_waste jika semua kondisi terpenuhi
-    INSERT INTO pickup_waste (pickup_date, pickup_address, district_address, dropbox_id, courier_id, community_id, pickup_status)
-    VALUES (p_pickup_date, p_pickup_address, p_district_address, p_dropbox_id, p_courier_id, p_community_id, 'pending');
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `register_community` (IN `p_name` VARCHAR(50), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(255), IN `p_phone` VARCHAR(15), IN `p_date_of_birth` DATE, IN `p_address` VARCHAR(255), IN `p_photo` VARCHAR(255))   BEGIN
-    DECLARE email_valid TINYINT(1);
-    DECLARE phone_valid TINYINT(1);
-    DECLARE email_exists INT;
-
-    -- Check email format
-    SET email_valid = func_email_format(p_email);
-    IF email_valid = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid email format';
-    END IF;
-
-    -- Check phone format
-    SET phone_valid = func_phone(p_phone);
-    IF phone_valid = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
-    END IF;
-
-    -- Check if email jika sudah ada
-    SELECT COUNT(*) INTO email_exists
-    FROM community
-    WHERE email = p_email;
-    
-    IF email_exists > 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email is already registered';
-    END IF;
-
-    -- Insert new community jika semua CHECK terpenuhi
-    INSERT INTO community (
-        name, email, password, phone, date_of_birth, address,
-        photo, is_verified, created_at, updated_at
-    ) VALUES (
-        p_name, p_email, p_password, p_phone, p_date_of_birth, p_address,
-        p_photo, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
-    );
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `register_courier` (IN `p_name` VARCHAR(50), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(255), IN `p_phone` VARCHAR(15), IN `p_date_of_birth` DATE, IN `p_address` VARCHAR(255), IN `p_nik` VARCHAR(255), IN `p_account_number` VARCHAR(50), IN `p_ktp_url` VARCHAR(255), IN `p_kk_url` VARCHAR(255), IN `p_photo` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `01_register_courier` (IN `p_name` VARCHAR(50), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(255), IN `p_phone` VARCHAR(15), IN `p_date_of_birth` DATE, IN `p_address` VARCHAR(255), IN `p_nik` VARCHAR(255), IN `p_account_number` VARCHAR(50), IN `p_ktp_url` VARCHAR(255), IN `p_kk_url` VARCHAR(255), IN `p_photo` VARCHAR(255))   BEGIN
     DECLARE email_valid TINYINT(1);
     DECLARE phone_valid TINYINT(1);
     DECLARE email_exists INT;
@@ -151,7 +73,43 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `register_courier` (IN `p_name` VARC
     );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `register_management` (IN `p_name` VARCHAR(50), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(50), IN `p_date_of_birth` DATE, IN `p_address` VARCHAR(255), IN `p_phone` VARCHAR(15), IN `p_photo` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `02_register_community` (IN `p_name` VARCHAR(50), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(255), IN `p_phone` VARCHAR(15), IN `p_date_of_birth` DATE, IN `p_address` VARCHAR(255), IN `p_photo` VARCHAR(255))   BEGIN
+    DECLARE email_valid TINYINT(1);
+    DECLARE phone_valid TINYINT(1);
+    DECLARE email_exists INT;
+
+    -- Check email format
+    SET email_valid = func_email_format(p_email);
+    IF email_valid = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid email format';
+    END IF;
+
+    -- Check phone format
+    SET phone_valid = func_phone(p_phone);
+    IF phone_valid = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
+    END IF;
+
+    -- Check if email jika sudah ada
+    SELECT COUNT(*) INTO email_exists
+    FROM community
+    WHERE email = p_email;
+    
+    IF email_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email is already registered';
+    END IF;
+
+    -- Insert new community jika semua CHECK terpenuhi
+    INSERT INTO community (
+        name, email, password, phone, date_of_birth, address,
+        photo, is_verified, created_at, updated_at
+    ) VALUES (
+        p_name, p_email, p_password, p_phone, p_date_of_birth, p_address,
+        p_photo, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+    );
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `03_register_management` (IN `p_name` VARCHAR(50), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(50), IN `p_date_of_birth` DATE, IN `p_address` VARCHAR(255), IN `p_phone` VARCHAR(15), IN `p_photo` VARCHAR(255))   BEGIN
     DECLARE email_valid TINYINT(1);
     DECLARE phone_valid TINYINT(1);
     DECLARE email_exists INT;
@@ -196,10 +154,84 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `register_management` (IN `p_name` V
     
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `04_register_dropbox` (IN `p_name` VARCHAR(50), IN `p_address` VARCHAR(50), IN `p_longitude` VARCHAR(255), IN `p_latitude` VARCHAR(255), IN `p_capacity` INT)   BEGIN
+    DECLARE name_exists INT;
+    DECLARE address_exists INT;
+
+    -- Check if dropbox name already exists
+    SELECT COUNT(*) INTO name_exists
+    FROM dropbox
+    WHERE name = p_name;
+    
+    IF name_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox name is already registered';
+    END IF;
+
+    -- Check if dropbox address already exists
+    SELECT COUNT(*) INTO address_exists
+    FROM dropbox
+    WHERE address = p_address;
+
+    IF address_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox address is already registered';
+    END IF;
+
+    -- Insert new dropbox record if all checks pass
+    INSERT INTO dropbox (
+        name, address, longitude, latitude, capacity, status, created_at, updated_at
+    ) VALUES (
+        p_name, p_address, p_longitude, p_latitude, 
+        IF(p_capacity BETWEEN 0 AND 1000, p_capacity, 0), -- Ensure capacity is within 0-1000
+        'Available', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+    );
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `05_add_pickup_waste` (IN `p_pickup_date` DATE, IN `p_pickup_address` VARCHAR(255), IN `p_district_address` ENUM('Bandung Utara','Bandung Selatan','Bandung Timur','Bandung Barat','Cimahi','Kabupaten Bandung','Kabupaten Bandung Barat'), IN `p_dropbox_id` INT, IN `p_courier_id` INT, IN `p_community_id` INT)   BEGIN
+    DECLARE dropbox_capacity INT;
+    DECLARE courier_verified TINYINT(1);
+    DECLARE community_verified TINYINT(1);
+
+
+    -- 1. Check apakah drop box full?
+    SELECT capacity INTO dropbox_capacity
+    FROM dropbox
+    WHERE dropbox_id = p_dropbox_id;
+
+    IF dropbox_capacity >= 1000 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Drop box is full!';
+    END IF;
+
+    -- 2. Verifikasi kurir apakah verified?
+    SELECT is_verified INTO courier_verified
+    FROM courier
+    WHERE courier_id = p_courier_id AND is_active = 1;
+
+    IF courier_verified = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Courier is not verified or inactive!';
+    END IF;
+
+    -- 3. Verifikasi community apakah verified?
+    SELECT is_verified INTO community_verified
+    FROM community
+    WHERE community_id = p_community_id;
+
+    IF community_verified = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Community is not verified!';
+    END IF;
+
+    -- 4. Insert data into pickup_waste jika semua kondisi terpenuhi
+    INSERT INTO pickup_waste (pickup_date, pickup_address, district_address, dropbox_id, courier_id, community_id, pickup_status)
+    VALUES (p_pickup_date, p_pickup_address, p_district_address, p_dropbox_id, p_courier_id, p_community_id, 'pending');
+
+END$$
+
 --
 -- Functions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `func_email_format` (`email_input` VARCHAR(255)) RETURNS TINYINT(1) DETERMINISTIC BEGIN
+CREATE DEFINER=`root`@`localhost` FUNCTION `01_funct_email_format` (`email_input` VARCHAR(255)) RETURNS TINYINT(1) DETERMINISTIC BEGIN
     -- Memeriksa format email.
     -- Memastikan ada teks sebelum '@', diikuti oleh domain, dan ekstensi
     DECLARE is_valid TINYINT(1) DEFAULT 0;
@@ -211,7 +243,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `func_email_format` (`email_input` VA
     RETURN is_valid;
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `func_phone` (`phone_input` VARCHAR(15)) RETURNS TINYINT(1) DETERMINISTIC BEGIN
+CREATE DEFINER=`root`@`localhost` FUNCTION `02_funct_phone` (`phone_input` VARCHAR(15)) RETURNS TINYINT(1) DETERMINISTIC BEGIN
     -- Menggunakan regex untuk memastikan input hanya terdiri dari angka 0-9
     DECLARE is_valid TINYINT(1) DEFAULT 0;
 
@@ -220,6 +252,17 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `func_phone` (`phone_input` VARCHAR(1
     END IF;
 
     RETURN is_valid;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `03_funct_check_dropbox_status` (`p_dropbox_id` INT) RETURNS VARCHAR(50) CHARSET utf8mb4 DETERMINISTIC BEGIN
+    DECLARE status VARCHAR(50);
+
+    -- Ambil status dari tabel dropbox berdasarkan dropbox_id
+    SELECT status INTO status
+    FROM dropbox
+    WHERE dropbox_id = p_dropbox_id;
+
+    RETURN status;
 END$$
 
 DELIMITER ;
@@ -347,7 +390,7 @@ CREATE TABLE `dropbox` (
 --
 
 INSERT INTO `dropbox` (`dropbox_id`, `name`, `address`, `longitude`, `latitude`, `capacity`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Dropbox 1', 'Bandung Utara', '106.84559900', '-6.20876300', 500, 'Available', '2024-11-03 03:23:29', '2024-11-03 03:23:29'),
+(1, 'Dropbox 1', 'Bandung Utara', '106.84559900', '-6.20876300', 500, 'Available', '2024-11-03 03:23:29', '2024-11-03 05:38:18'),
 (2, 'Dropbox 2', 'Bandung Selatan', '106.84560000', '-6.20876400', 750, 'Available', '2024-11-03 03:23:29', '2024-11-03 03:23:29'),
 (3, 'Dropbox 3', 'Bandung Timur', '106.84560100', '-6.20876500', 250, 'Available', '2024-11-03 03:23:29', '2024-11-03 03:23:29'),
 (4, 'Dropbox 4', 'Bandung Barat', '106.84560200', '-6.20876600', 1000, 'Full', '2024-11-03 03:23:29', '2024-11-03 03:23:29'),
@@ -400,7 +443,21 @@ CREATE TABLE `pickup_detail` (
 -- Triggers `pickup_detail`
 --
 DELIMITER $$
-CREATE TRIGGER `tr_dropbox_capacity` AFTER INSERT ON `pickup_detail` FOR EACH ROW BEGIN
+CREATE TRIGGER `01_tr_pickup_detail` BEFORE INSERT ON `pickup_detail` FOR EACH ROW BEGIN
+    DECLARE waste_point INT;
+
+    -- Mendapatkan point dari tabel waste berdasarkan waste_id yang dimasukkan
+    SELECT point INTO waste_point
+    FROM waste
+    WHERE waste_id = NEW.waste_id;
+
+    -- Menghitung total points berdasarkan quantity dan point dari waste
+    SET NEW.points = waste_point * NEW.quantity;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `02_tr_dropbox_capacity` AFTER INSERT ON `pickup_detail` FOR EACH ROW BEGIN
     DECLARE new_capacity INT;
 
     -- Mengambil kapasitas terbaru dari dropbox yang terkait
@@ -418,20 +475,6 @@ CREATE TRIGGER `tr_dropbox_capacity` AFTER INSERT ON `pickup_detail` FOR EACH RO
         SET capacity = new_capacity
         WHERE dropbox_id = (SELECT dropbox_id FROM pickup_waste WHERE pickup_id = NEW.pickup_id);
     END IF;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tr_pickup_detail` BEFORE INSERT ON `pickup_detail` FOR EACH ROW BEGIN
-    DECLARE waste_point INT;
-
-    -- Mendapatkan point dari tabel waste berdasarkan waste_id yang dimasukkan
-    SELECT point INTO waste_point
-    FROM waste
-    WHERE waste_id = NEW.waste_id;
-
-    -- Menghitung total points berdasarkan quantity dan point dari waste
-    SET NEW.points = waste_point * NEW.quantity;
 END
 $$
 DELIMITER ;
@@ -460,14 +503,14 @@ CREATE TABLE `pickup_waste` (
 -- Triggers `pickup_waste`
 --
 DELIMITER $$
-CREATE TRIGGER `tr_pickup_dropbox` BEFORE INSERT ON `pickup_waste` FOR EACH ROW BEGIN
+CREATE TRIGGER `03_tr_pickup_dropbox` BEFORE INSERT ON `pickup_waste` FOR EACH ROW BEGIN
     DECLARE dropbox_status VARCHAR(50);
 
-    -- Cek status dropbox dengan menggunakan function check_dropbox_status
+    -- Mengambil status dropbox menggunakan fungsi check_dropbox_status
     SET dropbox_status = check_dropbox_status(NEW.dropbox_id);
 
-    -- Jika status dropbox adalah 'Drop box is Full!', maka batalkan proses insert
-    IF dropbox_status = 'Drop box is Full!' THEN
+    -- Jika status dropbox adalah 'Full', batalkan operasi INSERT dengan pesan error
+    IF dropbox_status = 'Full' THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Drop box is Full!';
     END IF;
@@ -475,7 +518,7 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `tr_points_courier_community` AFTER UPDATE ON `pickup_waste` FOR EACH ROW BEGIN
+CREATE TRIGGER `04_tr_points_courier_community` AFTER UPDATE ON `pickup_waste` FOR EACH ROW BEGIN
     DECLARE total_points INT DEFAULT 0;
 
     -- Cek jika status baru adalah 'completed'
@@ -496,7 +539,7 @@ CREATE TRIGGER `tr_points_courier_community` AFTER UPDATE ON `pickup_waste` FOR 
         IF NEW.courier_id IS NOT NULL THEN
             INSERT INTO courier_points (courier_id, total_waste)
             VALUES (NEW.courier_id, total_points)
-            ON DUPLICATE KEY UPDATE total_waste = total_waste + VALUES(total_waste);
+            ON DUPLICATE KEY UPDATE total_waste = total_points + VALUES(total_points);
         END IF;
     END IF;
 END
