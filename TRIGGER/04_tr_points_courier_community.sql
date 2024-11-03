@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE TRIGGER tr_points_courier_community
+CREATE TRIGGER 04_tr_points_courier_community
 AFTER UPDATE ON pickup_waste
 FOR EACH ROW
 BEGIN

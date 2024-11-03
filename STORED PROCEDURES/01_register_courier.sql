@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE PROCEDURE register_courier (
+CREATE PROCEDURE 01_register_courier (
     IN p_name VARCHAR(50),
     IN p_email VARCHAR(50),
     IN p_password VARCHAR(255),

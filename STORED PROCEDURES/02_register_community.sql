@@ -1,10 +1,10 @@
 DELIMITER //
 
 CREATE PROCEDURE register_community (
-    IN p_name VARCHAR(255),
-    IN p_email VARCHAR(255),
+    IN p_name VARCHAR(50),
+    IN p_email VARCHAR(50),
     IN p_password VARCHAR(255),
-    IN p_phone VARCHAR(50),
+    IN p_phone VARCHAR(15),
     IN p_date_of_birth DATE,
     IN p_address VARCHAR(255),
     IN p_photo VARCHAR(255)
@@ -13,7 +13,6 @@ BEGIN
     DECLARE email_valid TINYINT(1);
     DECLARE phone_valid TINYINT(1);
     DECLARE email_exists INT;
-    DECLARE phone_exists INT;
 
     -- Check email format
     SET email_valid = func_email_format(p_email);
@@ -27,7 +26,7 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
     END IF;
 
-    -- Check if email already exists
+    -- Check if email jika sudah ada
     SELECT COUNT(*) INTO email_exists
     FROM community
     WHERE email = p_email;
@@ -36,16 +35,7 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email is already registered';
     END IF;
 
-    -- Check if phone number already exists
-    SELECT COUNT(*) INTO phone_exists
-    FROM community
-    WHERE phone = p_phone;
-
-    IF phone_exists > 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number is already registered';
-    END IF;
-
-    -- Insert new community if all checks pass
+    -- Insert new community jika semua CHECK terpenuhi
     INSERT INTO community (
         name, email, password, phone, date_of_birth, address,
         photo, is_verified, created_at, updated_at
@@ -64,6 +54,6 @@ CALL register_community(
     'securepassword', -- password
     '081234567891', -- phone
     '1990-08-20', -- date of birth
-    '456 Maple Ave, City', -- address
+    'Bougenville 7, Bandung', -- address
     'http://example.com/photo.jpg' -- photo (boleh null)
 );

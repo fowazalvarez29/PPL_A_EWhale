@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE TRIGGER tr_dropbox_capacity.
+CREATE TRIGGER 02_tr_dropbox_capacity
 AFTER INSERT ON pickup_detail
 FOR EACH ROW
 BEGIN

@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE PROCEDURE register_management(
+CREATE PROCEDURE 03_register_management(
     IN p_name VARCHAR(50),
     IN p_email VARCHAR(50),
     IN p_password VARCHAR(50),
@@ -58,11 +58,11 @@ DELIMITER ;
 
 -- Contoh pemanggilan
 CALL register_management(
-    'Alvarez', -- name
-    'alvarez@example.com', -- email
-    'password_nu_aman', -- password
-    '0812345678090', -- phone
-    '1985-04-10', -- date
-    'Bandung Lautan Air', -- address
-    'http://example.com/photo.jpg' -- photo (boleh null)
+    'John Doe',
+    'johndoe@example.com',
+    'securepassword',
+    '1985-05-12',
+    '123 Main St',
+    '081234567890',
+    'path/to/photo.jpg'
 );

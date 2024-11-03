@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE PROCEDURE add_pickup_waste(
+CREATE PROCEDURE 05_add_pickup_waste(
     IN p_pickup_date DATE,
     IN p_pickup_address VARCHAR(255),
     IN p_district_address ENUM('Bandung Utara', 'Bandung Selatan', 'Bandung Timur', 'Bandung Barat', 'Cimahi', 'Kabupaten Bandung', 'Kabupaten Bandung Barat'),

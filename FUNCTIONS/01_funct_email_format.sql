@@ -1,10 +1,10 @@
 DELIMITER //
 
-CREATE FUNCTION func_email_format(email_input VARCHAR(255))
+CREATE FUNCTION 01_funct_email_format(email_input VARCHAR(255))
 RETURNS TINYINT(1)
 DETERMINISTIC
 BEGIN
-    -- Menggunakan regex sederhana untuk memeriksa format email.
+    -- Memeriksa format email.
     -- Memastikan ada teks sebelum '@', diikuti oleh domain, dan ekstensi
     DECLARE is_valid TINYINT(1) DEFAULT 0;
 
