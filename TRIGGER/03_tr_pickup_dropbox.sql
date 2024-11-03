@@ -2,7 +2,7 @@
 
 DELIMITER //
 
-CREATE TRIGGER 03_tr_pickup_dropbox
+CREATE TRIGGER tr_pickup_dropbox
 BEFORE INSERT ON pickup_waste
 FOR EACH ROW
 BEGIN

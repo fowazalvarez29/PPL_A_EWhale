@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE FUNCTION 01_funct_email_format(email_input VARCHAR(255))
+CREATE FUNCTION funct_email_format(email_input VARCHAR(255))
 RETURNS TINYINT(1)
 DETERMINISTIC
 BEGIN

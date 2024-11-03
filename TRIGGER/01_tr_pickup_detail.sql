@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE TRIGGER 01_tr_pickup_detail
+CREATE TRIGGER tr_pickup_detail
 BEFORE INSERT ON pickup_detail
 FOR EACH ROW
 BEGIN

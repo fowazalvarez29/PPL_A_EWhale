@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE PROCEDURE 04_register_dropbox (
+CREATE PROCEDURE register_dropbox (
     IN p_name VARCHAR(50),
     IN p_address VARCHAR(50),
     IN p_longitude VARCHAR(255),

@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE PROCEDURE 03_register_management(
+CREATE PROCEDURE register_management(
     IN p_name VARCHAR(50),
     IN p_email VARCHAR(50),
     IN p_password VARCHAR(50),

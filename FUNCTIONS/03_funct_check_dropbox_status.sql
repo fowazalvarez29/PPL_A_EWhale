@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE FUNCTION 03_funct_check_dropbox_status(p_dropbox_id INT)
+CREATE FUNCTION funct_check_dropbox_status(p_dropbox_id INT)
 RETURNS VARCHAR(50)
 DETERMINISTIC
 BEGIN
