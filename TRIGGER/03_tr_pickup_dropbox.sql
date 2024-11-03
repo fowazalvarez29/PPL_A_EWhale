@@ -1,3 +1,6 @@
+
+-- HARUS JALANKAN FUNCTIONS 03 TERLEBIH DAHULU!!!
+
 DELIMITER //
 
 CREATE TRIGGER tr_pickup_dropbox
@@ -6,10 +9,10 @@ FOR EACH ROW
 BEGIN
     DECLARE dropbox_status VARCHAR(50);
 
-    -- Cek status dropbox dengan menggunakan function check_dropbox_status
+    -- Mengambil status dropbox menggunakan fungsi check_dropbox_status
     SET dropbox_status = check_dropbox_status(NEW.dropbox_id);
 
-    -- Jika status dropbox adalah 'Drop box is Full!', maka batalkan proses insert
+    -- Jika status dropbox adalah 'Full', batalkan operasi INSERT dengan pesan error
     IF dropbox_status = 'Full' THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Drop box is Full!';

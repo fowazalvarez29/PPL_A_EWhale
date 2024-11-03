@@ -24,7 +24,7 @@ BEGIN
         IF NEW.courier_id IS NOT NULL THEN
             INSERT INTO courier_points (courier_id, total_waste)
             VALUES (NEW.courier_id, total_points)
-            ON DUPLICATE KEY UPDATE total_waste = total_waste + VALUES(total_waste);
+            ON DUPLICATE KEY UPDATE total_waste = total_points + VALUES(total_points);
         END IF;
     END IF;
 END //
