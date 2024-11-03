@@ -116,15 +116,14 @@ CREATE TABLE pickup_detail (
     waste_id INT,
     quantity INT DEFAULT 0 CHECK (quantity >= 0),
     points INT DEFAULT 0 CHECK (points >= 0),
-    PRIMARY KEY (pickup_id, waste_id),
-    FOREIGN KEY (pickup_id) REFERENCES pickup_waste(pickup_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (waste_id) REFERENCES waste(waste_id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (pickup_id) REFERENCES pickup_waste(pickup_id) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (waste_id) REFERENCES waste(waste_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 -- Tabel community_points untuk mencatat poin yang dikumpulkan oleh masyarakat
 CREATE TABLE community_points (
     points_id INT AUTO_INCREMENT PRIMARY KEY,
-    community_id INT UNIQUE,
+    community_id INT,
     total_points INT DEFAULT 0 CHECK(total_points >= 0),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -134,7 +133,7 @@ CREATE TABLE community_points (
 -- Tabel courier_points untuk mencatat total sampah elektronik yang diambil oleh kurir
 CREATE TABLE courier_points (
     points_id INT AUTO_INCREMENT PRIMARY KEY,
-    courier_id INT UNIQUE,
+    courier_id INT,
     total_points INT DEFAULT 0 CHECK(total_points >= 0),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
