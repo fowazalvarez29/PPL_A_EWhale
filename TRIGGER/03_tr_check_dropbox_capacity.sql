@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE TRIGGER tr_pickup_dropbox
+CREATE TRIGGER tr_check_dropbox_capacity
 BEFORE INSERT ON pickup_waste
 FOR EACH ROW
 BEGIN

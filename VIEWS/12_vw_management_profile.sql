@@ -1,4 +1,4 @@
-CREATE VIEW vw_management_profile AS
+CREATE OR REPLACE VIEW vw_management_profile AS
 SELECT 
     m.management_id,
     m.name AS management_name,

@@ -21,9 +21,9 @@ VALUES
 -- Data Dummy untuk Tabel Management
 INSERT INTO management (name, email, password, date_of_birth, address, phone, photo, is_verified, is_admin)
 VALUES
-('Lutfi', 'lutfi@email.com', 'password1', '2000-05-15', 'Jl. Mawar No. 1', NULL, NULL, 1, 1),
-('Fauzi', 'fauzi@email.com', 'password2', '2000-08-22', 'Jl. Melati No. 2', NULL, NULL, 1, 0),
-('Malwi', 'malwi@email.com', 'password3', '2000-12-10', 'Jl. Anggrek No. 3', NULL, NULL, 1, 0);
+('Lutfi', 'lutfi@email.com', 'password1', '2000-05-15', 'Jl. Mawar No. 1', '085959666999', NULL, 1, 1),
+('Fauzi', 'fauzi@email.com', 'password2', '2000-08-22', 'Jl. Melati No. 2', '08169696969', NULL, 1, 0),
+('Malwi', 'malwi@email.com', 'password3', '2000-12-10', 'Jl. Anggrek No. 3', '085959666991', NULL, 1, 0);
 
 -- Data Dummy untuk Dropbox
 INSERT INTO dropbox (name, address, district_address, longitude, latitude, capacity, status)
@@ -48,15 +48,15 @@ VALUES
 COMMIT;
 
 -- Data Dummy untuk Waste yang relevan dengan setiap kategori
-INSERT INTO waste (waste_name, category, point, waste_type_id, image, description)
+INSERT INTO waste (waste_name, point, waste_type_id, image, description)
 VALUES
-('Washing Machine', 'Large Household Appliance', 50, 1, NULL, 'Large household appliance for washing clothes'),
-('Hand Blender', 'Small Household Appliances', 10, 2, NULL, 'Compact blender for small-scale food preparation'),
-('Laptop', 'IT Equipment', 25, 3, NULL, 'Portable computer device for work and entertainment'),
-('Fluorescent Lamp', 'Lamps', 5, 4, NULL, 'Energy-saving fluorescent lighting device'),
-('Electronic Toy Car', 'Toys', 8, 5, NULL, 'Battery-powered electronic toy car for children'),
-('LCD Monitor', 'Screens and Monitors', 20, 6, NULL, 'LCD monitor for computer displays'),
-('Digital Camera', 'Other Electronic Devices', 15, 7, NULL, 'Portable digital camera for capturing photos');
+('Washing Machine', 50, 1, NULL, 'Large household appliance for washing clothes'),
+('Hand Blender', 10, 2, NULL, 'Compact blender for small-scale food preparation'),
+('Laptop', 25, 3, NULL, 'Portable computer device for work and entertainment'),
+('Fluorescent Lamp', 5, 4, NULL, 'Energy-saving fluorescent lighting device'),
+('Electronic Toy Car', 8, 5, NULL, 'Battery-powered electronic toy car for children'),
+('LCD Monitor', 20, 6, NULL, 'LCD monitor for computer displays'),
+('Digital Camera', 15, 7, NULL, 'Portable digital camera for capturing photos');
 
 
 -- Mengatur kembali ID agar dimulai dari 1

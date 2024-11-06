@@ -1,6 +1,10 @@
 DELIMITER //
 
-CREATE FUNCTION funct_phone(phone_input VARCHAR(15))
+DROP FUNCTION IF EXISTS funct_phone //
+
+CREATE FUNCTION funct_phone(
+    phone_input VARCHAR(15)
+    )
 RETURNS TINYINT(1)
 DETERMINISTIC
 BEGIN

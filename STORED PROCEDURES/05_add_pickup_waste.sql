@@ -1,5 +1,7 @@
 DELIMITER //
 
+DROP PROCEDURE IF EXISTS add_pickup_waste //
+
 CREATE PROCEDURE add_pickup_waste(
     IN p_pickup_date DATE,
     IN p_pickup_address VARCHAR(255),
@@ -15,7 +17,7 @@ BEGIN
     DECLARE courier_exists INT;
     DECLARE community_exists INT;
 
-    -- 1. Check if the dropbox exists
+    -- 1. Check apakah dropbox ada
     SELECT COUNT(*) INTO dropbox_exists
     FROM dropbox
     WHERE dropbox_id = p_dropbox_id;
@@ -24,7 +26,7 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox does not exist!';
     END IF;
 
-    -- 2. Check if the dropbox is full
+    -- 2. Check apakah dropbox full
     SELECT capacity INTO dropbox_capacity
     FROM dropbox
     WHERE dropbox_id = p_dropbox_id;
@@ -33,7 +35,7 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Dropbox is full!';
     END IF;
 
-    -- 3. Check if the courier exists and is verified and active
+    -- 3. Check apakah courier exists dan is verified
     SELECT COUNT(*) INTO courier_exists
     FROM courier
     WHERE courier_id = p_courier_id AND is_verified = 1 AND status = 'Approved';
@@ -42,16 +44,16 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Courier is not verified or approved!';
     END IF;
 
-    -- 4. Check if the community exists and is verified
+    -- 4. Check apakah community exists dan is verified
     SELECT COUNT(*) INTO community_exists
     FROM community
     WHERE community_id = p_community_id AND is_verified = 1;
 
     IF community_exists = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Community is not verified!';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "You're not verified!";
     END IF;
 
-    -- 5. Insert data into pickup_waste if all conditions are met
+    -- 5. Insert data into pickup_waste jika semua conditions terpenuhi
     INSERT INTO pickup_waste (
         pickup_date, pickup_address, dropbox_id, courier_id, community_id, pickup_status
     ) VALUES (

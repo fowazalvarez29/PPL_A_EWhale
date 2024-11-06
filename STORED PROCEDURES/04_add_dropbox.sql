@@ -1,6 +1,8 @@
 DELIMITER //
 
-CREATE PROCEDURE register_dropbox (
+DROP PROCEDURE IF EXISTS add_dropbox //
+
+CREATE PROCEDURE add_dropbox (
     IN p_name VARCHAR(50),
     IN p_address VARCHAR(255),
     IN p_district_address ENUM('Bandung Utara', 'Bandung Selatan', 'Bandung Timur', 'Bandung Barat', 'Cimahi', 'Kabupaten Bandung', 'Kabupaten Bandung Barat'),
@@ -49,12 +51,12 @@ DELIMITER ;
 
 
 -- Contoh pemanggilan
-CALL register_dropbox(
-    'Dropbox B',                 -- p_name
-    'Jl. Kebon Jeruk No. 20',    -- p_address
-    NULL,                        -- p_district_address
-    106.845612,                  -- p_longitude
-    -6.208770,                   -- p_latitude
-    80                           -- p_capacity
+CALL add_dropbox (
+    'Dropbox Cimahi',       -- name
+    'Jl. Baros nomor 20',   -- address
+    'Cimahi',               -- district
+    NULL,                   -- longtitude
+    NULL,                   -- latitude
+    0                       -- capacity
 );
 

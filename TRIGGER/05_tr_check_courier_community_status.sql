@@ -6,9 +6,9 @@ FOR EACH ROW
 BEGIN
     -- Periksa apakah courier memenuhi syarat
     IF NEW.courier_id IS NOT NULL THEN
-        IF NOT is_courier_verified_and_active(NEW.courier_id) THEN
+        IF NOT is_courier_verified(NEW.courier_id) THEN
             SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'Courier Not Verified or Active!';
+            SET MESSAGE_TEXT = 'Courier Not Verified!';
         END IF;
     END IF;
 

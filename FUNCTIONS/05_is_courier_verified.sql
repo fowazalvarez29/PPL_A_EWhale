@@ -1,6 +1,8 @@
 DELIMITER //
 
-CREATE FUNCTION is_community_verified(communityId INT) 
+DROP FUNCTION IF EXISTS is_courier_verified //
+
+CREATE FUNCTION is_courier_verified(courierId INT) 
 RETURNS BOOLEAN
 DETERMINISTIC
 BEGIN
@@ -8,11 +10,11 @@ BEGIN
 
     -- Pastikan query hanya mengembalikan satu baris
     SELECT is_verified INTO verified
-    FROM community
-    WHERE community_id = communityId
+    FROM courier
+    WHERE courier_id = courierId
     LIMIT 1;
 
-    -- Kembalikan TRUE jika community terverifikasi
+    -- Kembalikan TRUE jika courier terverifikasi
     RETURN (verified = 1);
 END //
 

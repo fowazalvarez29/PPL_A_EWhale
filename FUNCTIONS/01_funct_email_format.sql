@@ -1,5 +1,7 @@
 DELIMITER //
 
+DROP FUNCTION IF EXISTS funct_email_format //
+
 CREATE FUNCTION funct_email_format(email_input VARCHAR(255))
 RETURNS TINYINT(1)
 DETERMINISTIC

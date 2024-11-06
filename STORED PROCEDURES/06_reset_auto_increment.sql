@@ -1,5 +1,7 @@
 DELIMITER //
 
+DROP PROCEDURE IF EXISTS reset_auto_increment //
+
 CREATE PROCEDURE reset_auto_increment()
 BEGIN
     START TRANSACTION;

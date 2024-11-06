@@ -1,4 +1,4 @@
-CREATE VIEW vw_community_profile AS
+CREATE OR REPLACE VIEW vw_community_profile AS
 SELECT 
     cm.community_id,
     cm.name AS community_name,

@@ -1,5 +1,7 @@
 DELIMITER //
 
+DROP PROCEDURE IF EXISTS register_management //
+
 CREATE PROCEDURE register_management (
     IN p_name VARCHAR(50),
     IN p_email VARCHAR(50),
@@ -12,6 +14,7 @@ CREATE PROCEDURE register_management (
 BEGIN
     DECLARE email_valid TINYINT(1);
     DECLARE phone_valid TINYINT(1);
+    DECLARE pass_valid TINYINT(1);
     DECLARE email_exists INT;
     DECLARE phone_exists INT; 
 
@@ -23,6 +26,12 @@ BEGIN
     SET phone_valid = funct_phone(p_phone);
     IF phone_valid = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Phone number can only contain numbers';
+    END IF;
+
+    -- Validasi Password
+    SET pass_valid = funct_password_policy(p_password);
+    IF pass_valid = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Password must contain at least 8 characters and include Upercase, Lowercase, Number and Special Character!';
     END IF;
 
     SELECT COUNT(*) INTO email_exists FROM management WHERE email = p_email;
