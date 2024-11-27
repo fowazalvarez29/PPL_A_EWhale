@@ -1,8 +1,8 @@
 DELIMITER //
 
-DROP TRIGGER IF EXISTS validate_and_approve_courier //
+DROP TRIGGER IF EXISTS tr_validate_and_approve_courier //
 
-CREATE TRIGGER validate_and_approve_courier
+CREATE TRIGGER tr_validate_and_approve_courier
 BEFORE UPDATE ON courier
 FOR EACH ROW
 BEGIN
