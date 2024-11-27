@@ -1,5 +1,7 @@
 DELIMITER //
 
+DROP TRIGGER IF EXISTS tr_pickup_detail_total_points //
+
 CREATE TRIGGER tr_pickup_detail_total_points
 BEFORE INSERT ON pickup_detail
 FOR EACH ROW

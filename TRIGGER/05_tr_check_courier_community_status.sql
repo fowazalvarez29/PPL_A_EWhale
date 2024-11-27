@@ -1,5 +1,7 @@
 DELIMITER //
 
+DROP TRIGGER IF EXISTS tr_check_courier_community_status //
+
 CREATE TRIGGER tr_check_courier_community_status
 BEFORE INSERT ON pickup_waste
 FOR EACH ROW

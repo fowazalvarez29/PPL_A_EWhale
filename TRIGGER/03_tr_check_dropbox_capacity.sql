@@ -1,18 +1,25 @@
 DELIMITER //
 
+DROP TRIGGER IF EXISTS tr_check_dropbox_capacity //
+
+DELIMITER //
+
 CREATE TRIGGER tr_check_dropbox_capacity
 BEFORE INSERT ON pickup_waste
 FOR EACH ROW
 BEGIN
-    DECLARE required_quantity INT DEFAULT 1;  -- Jumlah pickup, disesuaikan sesuai kebutuhan
+    DECLARE dropbox_status ENUM('Full', 'Available');
 
-    -- Cek kapasitas dropbox menggunakan fungsi check_dropbox_capacity
-    IF check_dropbox_capacity(NEW.dropbox_id, required_quantity) = FALSE THEN
+    -- Mendapatkan status dropbox terkait
+    SELECT status INTO dropbox_status
+    FROM dropbox
+    WHERE dropbox_id = NEW.dropbox_id;
+
+    -- Jika status dropbox adalah 'Full', batalkan operasi
+    IF dropbox_status = 'Full' THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Dropbox is full!!';
+        SET MESSAGE_TEXT = 'Cannot add pickup request: Dropbox is full.';
     END IF;
-
-    -- Jika kapasitas dropbox cukup, operasi `INSERT` akan berlanjut
 END //
 
 DELIMITER ;

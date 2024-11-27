@@ -6,13 +6,12 @@ CREATE PROCEDURE manage_waste_type (
     IN p_action ENUM('add', 'update', 'delete'),
     IN p_waste_type_id INT,
     IN p_waste_type_name ENUM(
-        'Large Household Appliance', 
-        'Small Household Appliances', 
-        'IT Equipment', 
-        'Lamps', 
-        'Toys', 
-        'Screens and Monitors', 
-        'Other Electronic Devices'),
+        'Peralatan rumah tangga besar', 
+        'Peralatan rumah tangga kecil', 
+        'Peralatan IT', 
+        'Lampu', 
+        'Mainan', 
+        'Peralatan elektronik lainnya'),
     IN p_image VARCHAR(255)
 )
 BEGIN

@@ -75,7 +75,7 @@ CREATE TABLE dropbox (
 -- Tabel waste_type untuk data jenis dan kategori sampah elektronik
 CREATE TABLE waste_type (
     waste_type_id INT AUTO_INCREMENT PRIMARY KEY,
-    waste_type_name ENUM('Large Household Apllience','Small Household Appliances','IT Equipment','Lamps','Toys','Screens and Monitors','Other Electronic Devices') NOT NULL,
+    waste_type_name ENUM('Peralatan rumah tangga besar','Peralatan rumah tangga kecil ','Peralatan IT','Lampu','Mainan','Peralatan elektronik lainnya') NOT NULL,
     image VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -98,8 +98,9 @@ CREATE TABLE waste (
 CREATE TABLE pickup_waste (
     pickup_id INT AUTO_INCREMENT PRIMARY KEY,
     pickup_date DATE NOT NULL,
+    pickup_time TIME NOT NULL,
     pickup_address VARCHAR(255) NOT NULL,
-    pickup_status ENUM('pending', 'accepted', 'completed', 'cancelled') DEFAULT 'pending',
+    pickup_status ENUM('requested', 'accepted', 'completed', 'cancelled') DEFAULT 'requested',
     dropbox_id INT,
     courier_id INT DEFAULT NULL,
     community_id INT,
@@ -108,8 +109,8 @@ CREATE TABLE pickup_waste (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (dropbox_id) REFERENCES dropbox(dropbox_id) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (courier_id) REFERENCES courier(courier_id) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (community_id) REFERENCES community(community_id) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (management_id) REFERENCES management(management_id) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY (management_id) REFERENCES management(management_id) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (community_id) REFERENCES community(community_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 -- Tabel pickup_detail untuk mencatat detail sampah elektronik yang diambil dalam setiap penjemputan

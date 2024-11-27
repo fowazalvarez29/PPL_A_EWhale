@@ -10,4 +10,4 @@ SELECT
 FROM pickup_waste pw
 JOIN community c ON pw.community_id = c.community_id
 LEFT JOIN dropbox d ON pw.dropbox_id = d.dropbox_id
-WHERE pw.pickup_status = 'pending';
+WHERE pw.pickup_status = 'requested';

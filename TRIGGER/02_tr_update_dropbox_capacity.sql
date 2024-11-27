@@ -1,5 +1,7 @@
 DELIMITER //
 
+DROP TRIGGER IF EXISTS tr_update_dropbox_capacity //
+
 CREATE TRIGGER tr_update_dropbox_capacity
 AFTER UPDATE ON pickup_waste
 FOR EACH ROW
