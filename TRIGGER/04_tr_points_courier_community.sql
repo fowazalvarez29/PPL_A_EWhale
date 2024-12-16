@@ -23,11 +23,11 @@ BEGIN
         END IF;
 
         -- Update total waste untuk courier
-        IF NEW.courier_id IS NOT NULL THEN
-            INSERT INTO courier_points (courier_id, total_points)
-            VALUES (NEW.courier_id, total_points)
-            ON DUPLICATE KEY UPDATE total_points = total_points + VALUES(total_points);
-        END IF;
+        -- IF NEW.courier_id IS NOT NULL THEN
+        --     INSERT INTO courier_points (courier_id, total_points)
+        --     VALUES (NEW.courier_id, total_points)
+        --     ON DUPLICATE KEY UPDATE total_points = total_points + VALUES(total_points);
+        -- END IF;
     END IF;
 END //
 

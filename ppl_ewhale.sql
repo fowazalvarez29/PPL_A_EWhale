@@ -48,7 +48,7 @@ CREATE TABLE `community` (
 
 LOCK TABLES `community` WRITE;
 /*!40000 ALTER TABLE `community` DISABLE KEYS */;
-INSERT INTO `community` VALUES (1,'Indri','indri@email.com','password1','08123456101','2000-01-01','Sumarecon',NULL,1,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(2,'Agam','agam@email.com','password2','08123456102','2000-01-01','Tahura',NULL,0,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(3,'Agung','agung@email.com','password3','08123456103','2000-01-01','Cihampelas',NULL,1,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(4,'Adit','adit@email.com','password4','08123456104','2000-01-01','Cimahi',NULL,1,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(5,'Gilman','gilman@email.com','password5','08123456105','2000-01-01','Cileunyi',NULL,0,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00');
+INSERT INTO `community` VALUES (1,'Indri','indri@email.com','password1','08123456101','2000-01-01','Sumarecon',NULL,1,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(2,'Agam','agam@email.com','password2','08123456102','2000-01-01','Tahura',NULL,0,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(3,'Agung','agung@email.com','password3','08123456103','2000-01-01','Cihampelas',NULL,1,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(4,'Adit','adit@email.com','password4','08123456104','2000-01-01','Cimahi',NULL,1,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(5,'Gilman','gilman@email.com','password5','08123456105','2000-01-01','Cileunyi',NULL,0,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22');
 /*!40000 ALTER TABLE `community` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `community_points` (
   KEY `community_id` (`community_id`),
   CONSTRAINT `community_points_ibfk_1` FOREIGN KEY (`community_id`) REFERENCES `community` (`community_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `community_points_chk_1` CHECK ((`total_points` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `community_points` (
 
 LOCK TABLES `community_points` WRITE;
 /*!40000 ALTER TABLE `community_points` DISABLE KEYS */;
-INSERT INTO `community_points` VALUES (1,1,200,'2024-11-27 15:35:21','2024-11-27 15:35:21'),(2,3,60,'2024-11-27 15:35:37','2024-11-27 15:35:37'),(3,4,40,'2024-11-27 15:35:43','2024-11-27 15:35:43');
+INSERT INTO `community_points` VALUES (1,1,250,'2024-12-16 14:50:39','2024-12-16 14:50:39');
 /*!40000 ALTER TABLE `community_points` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `courier` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `phone` varchar(15) NOT NULL,
+  `phone` varchar(15) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `account_number` varchar(50) DEFAULT NULL,
@@ -110,7 +110,6 @@ CREATE TABLE `courier` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`courier_id`),
   UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `phone` (`phone`),
   UNIQUE KEY `nik` (`nik`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -121,7 +120,7 @@ CREATE TABLE `courier` (
 
 LOCK TABLES `courier` WRITE;
 /*!40000 ALTER TABLE `courier` DISABLE KEYS */;
-INSERT INTO `courier` VALUES (1,'Haykal','haykal@email.com','password1','08123456701','2000-01-01','Address 1','1234567891','1234567890123451',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(2,'Faqih','faqih@email.com','password2','08123456702','2000-01-01','Address 2','1234567892','1234567890123452',NULL,NULL,NULL,0,'Pending',NULL,NULL,'2024-11-27 14:54:00','2024-11-27 15:18:25'),(3,'Fowaz','fowaz@email.com','password3','08123456703','2000-01-01','Address 3','1234567893','1234567890123453',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(4,'Daffa','daffa@email.com','password4','08123456704','2000-01-01','Address 4','1234567894','1234567890123454',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(5,'Ardhi','ardhi@email.com','password5','08123456705','2000-01-01','Address 5','1234567895','1234567890123455',NULL,NULL,NULL,1,'Approved',NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00');
+INSERT INTO `courier` VALUES (1,'Haykal','haykal@email.com','password1','08123456701','2000-01-01','Address 1','1234567891','1234567890123451','123','123','123',1,'Approved',NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:34:42'),(2,'Faqih','faqih@email.com','password2','08123456702','2000-01-01','Address 2','1234567892','1234567890123452','123','123','123',1,'Approved',NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:35:23'),(3,'Fowaz','fowaz@email.com','password3','08123456703','2000-01-01','Address 3','1234567893','1234567890123453',NULL,NULL,NULL,0,'Pending',NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:33:03'),(4,'Daffa','daffa@email.com','password4','08123456704','2000-01-01','Address 4','1234567894','1234567890123454','123','123','123',0,'Pending',NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:45:56'),(5,'Ardhi','ardhi@email.com','password5','08123456705','2000-01-01','Address 5','1234567895','1234567890123455','123','123','123',1,'Approved',NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:41:39');
 /*!40000 ALTER TABLE `courier` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -134,17 +133,34 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_validate_and_approve_courier` BEFORE UPDATE ON `courier` FOR EACH ROW BEGIN
-    -- Periksa apakah is_verified ingin diset menjadi 1
+    -- Periksa apakah is_verified diset menjadi 1
     IF NEW.is_verified = 1 THEN
         -- Periksa apakah nik, ktp_url, atau kk_url masih kosong
         IF NEW.nik IS NULL OR NEW.nik = '' 
            OR NEW.ktp_url IS NULL OR NEW.ktp_url = '' 
            OR NEW.kk_url IS NULL OR NEW.kk_url = '' THEN
             SIGNAL SQLSTATE '45000' 
-            SET MESSAGE_TEXT = 'Cannot verified: NIK, KTP, and KK must not be empty.';
+            SET MESSAGE_TEXT = 'Cannot set is_verified to TRUE: NIK, KTP, and KK must not be empty.';
         ELSE
             -- Jika semua validasi terpenuhi, ubah status menjadi 'Approved'
             SET NEW.status = 'Approved';
+        END IF;
+    END IF;
+
+    -- Periksa apakah is_verified diset menjadi 0
+    IF NEW.is_verified = 0 THEN
+        -- Jika is_verified menjadi 0, ubah status menjadi 'Pending'
+        SET NEW.status = 'Pending';
+    END IF;
+
+    -- Periksa jika status diubah menjadi 'Approved'
+    IF NEW.status = 'Approved' THEN
+        -- Pastikan semua data valid sebelum diset ke Approved
+        IF NEW.nik IS NULL OR NEW.nik = '' 
+           OR NEW.ktp_url IS NULL OR NEW.ktp_url = '' 
+           OR NEW.kk_url IS NULL OR NEW.kk_url = '' THEN
+            SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = 'Cannot set status to Approved: NIK, KTP, and KK must not be empty.';
         END IF;
     END IF;
 END */;;
@@ -153,36 +169,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Table structure for table `courier_points`
---
-
-DROP TABLE IF EXISTS `courier_points`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `courier_points` (
-  `points_id` int NOT NULL AUTO_INCREMENT,
-  `courier_id` int DEFAULT NULL,
-  `total_points` int DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`points_id`),
-  KEY `courier_id` (`courier_id`),
-  CONSTRAINT `courier_points_ibfk_1` FOREIGN KEY (`courier_id`) REFERENCES `courier` (`courier_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `courier_points_chk_1` CHECK ((`total_points` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `courier_points`
---
-
-LOCK TABLES `courier_points` WRITE;
-/*!40000 ALTER TABLE `courier_points` DISABLE KEYS */;
-INSERT INTO `courier_points` VALUES (1,1,200,'2024-11-27 15:35:21','2024-11-27 15:35:21'),(2,3,60,'2024-11-27 15:35:37','2024-11-27 15:35:37'),(3,4,40,'2024-11-27 15:35:43','2024-11-27 15:35:43');
-/*!40000 ALTER TABLE `courier_points` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `dropbox`
@@ -213,9 +199,30 @@ CREATE TABLE `dropbox` (
 
 LOCK TABLES `dropbox` WRITE;
 /*!40000 ALTER TABLE `dropbox` DISABLE KEYS */;
-INSERT INTO `dropbox` VALUES (1,'Dropbox 1','Jl. Example No.1','Bandung Utara',106.84559900,-6.20876300,51,'Available','2024-11-27 14:54:00','2024-11-27 15:35:37'),(2,'Dropbox 2','Jl. Example No.2','Bandung Selatan',106.84560000,-6.20876400,99,'Available','2024-11-27 14:54:00','2024-11-27 14:59:20'),(3,'Dropbox 3','Jl. Example No.3','Bandung Timur',106.84560100,-6.20876500,75,'Available','2024-11-27 14:54:00','2024-11-27 14:54:00'),(4,'Dropbox 4','Jl. Example No.4','Bandung Barat',106.84560200,-6.20876600,100,'Full','2024-11-27 14:54:00','2024-11-27 14:56:54'),(5,'Dropbox 5','Jl. Example No.5','Cimahi',106.84560300,-6.20876700,62,'Available','2024-11-27 14:54:00','2024-11-27 15:35:43');
+INSERT INTO `dropbox` VALUES (1,'Dropbox 1','Jl. Example No.1','Bandung Utara',106.84559900,-6.20876300,51,'Available','2024-12-16 14:25:22','2024-12-16 14:50:39'),(2,'Dropbox 2','Jl. Example No.2','Bandung Selatan',106.84560000,-6.20876400,99,'Available','2024-12-16 14:25:22','2024-12-16 14:25:22'),(3,'Dropbox 3','Jl. Example No.3','Bandung Timur',106.84560100,-6.20876500,0,'Available','2024-12-16 14:25:22','2024-12-16 14:25:22'),(4,'Dropbox 4','Jl. Example No.4','Bandung Barat',106.84560200,-6.20876600,100,'Full','2024-12-16 14:25:22','2024-12-16 14:25:22'),(5,'Dropbox 5','Jl. Example No.5','Cimahi',106.84560300,-6.20876700,60,'Available','2024-12-16 14:25:22','2024-12-16 14:25:22');
 /*!40000 ALTER TABLE `dropbox` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_set_status_insert_dropbox` BEFORE INSERT ON `dropbox` FOR EACH ROW BEGIN
+    IF NEW.capacity >= 100 THEN
+        SET NEW.status = 'Full';
+    ELSE
+        SET NEW.status = 'Available';
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -273,7 +280,7 @@ CREATE TABLE `management` (
 
 LOCK TABLES `management` WRITE;
 /*!40000 ALTER TABLE `management` DISABLE KEYS */;
-INSERT INTO `management` VALUES (1,'Lutfi','lutfi@email.com','password1','2000-05-15','Jl. Mawar No. 1','085959666999',NULL,1,1,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(2,'Fauzi','fauzi@email.com','password2','2000-08-22','Jl. Melati No. 2','08169696969',NULL,1,0,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(3,'Malwi','malwi@email.com','password3','2000-12-10','Jl. Anggrek No. 3','085959666991',NULL,1,0,NULL,NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00');
+INSERT INTO `management` VALUES (1,'Lutfi','lutfi@email.com','password1','2000-05-15','Jl. Mawar No. 1','085959666999',NULL,1,1,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(2,'Fauzi','fauzi@email.com','password2','2000-08-22','Jl. Melati No. 2','08169696969',NULL,1,0,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(3,'Malwi','malwi@email.com','password3','2000-12-10','Jl. Anggrek No. 3','085959666991',NULL,1,0,NULL,NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22');
 /*!40000 ALTER TABLE `management` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +311,7 @@ CREATE TABLE `pickup_detail` (
 
 LOCK TABLES `pickup_detail` WRITE;
 /*!40000 ALTER TABLE `pickup_detail` DISABLE KEYS */;
-INSERT INTO `pickup_detail` VALUES (1,1,2,200),(2,28,3,60),(3,27,5,40);
+INSERT INTO `pickup_detail` VALUES (1,31,10,250),(2,1,2,200);
 /*!40000 ALTER TABLE `pickup_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -361,7 +368,7 @@ CREATE TABLE `pickup_waste` (
   CONSTRAINT `pickup_waste_ibfk_2` FOREIGN KEY (`courier_id`) REFERENCES `courier` (`courier_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `pickup_waste_ibfk_3` FOREIGN KEY (`management_id`) REFERENCES `management` (`management_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `pickup_waste_ibfk_4` FOREIGN KEY (`community_id`) REFERENCES `community` (`community_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -370,9 +377,37 @@ CREATE TABLE `pickup_waste` (
 
 LOCK TABLES `pickup_waste` WRITE;
 /*!40000 ALTER TABLE `pickup_waste` DISABLE KEYS */;
-INSERT INTO `pickup_waste` VALUES (1,'2024-11-27','20:00:00','Cimahi','completed',5,1,1,NULL,'2024-11-27 15:31:09','2024-11-27 15:35:21'),(2,'2024-11-27','21:00:00','Cicaheum','completed',1,3,3,NULL,'2024-11-27 15:32:41','2024-11-27 15:35:37'),(3,'2024-11-28','22:00:00','Alun-Alun Cimahi','completed',5,4,4,NULL,'2024-11-27 15:33:36','2024-11-27 15:35:43');
+INSERT INTO `pickup_waste` VALUES (1,'2024-12-01','10:00:00','Cimahi','completed',1,1,1,NULL,'2024-12-16 14:50:14','2024-12-16 14:50:39'),(2,'2024-12-03','17:00:00','Bandung Timur','accepted',3,2,3,NULL,'2024-12-16 14:52:49','2024-12-16 14:53:10');
 /*!40000 ALTER TABLE `pickup_waste` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_check_dropbox_capacity` BEFORE INSERT ON `pickup_waste` FOR EACH ROW BEGIN
+    DECLARE dropbox_status ENUM('Full', 'Available');
+
+    -- Mendapatkan status dropbox terkait
+    SELECT status INTO dropbox_status
+    FROM dropbox
+    WHERE dropbox_id = NEW.dropbox_id;
+
+    -- Jika status dropbox adalah 'Full', batalkan operasi
+    IF dropbox_status = 'Full' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot add pickup request: Dropbox is full.';
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -397,34 +432,6 @@ DELIMITER ;;
             SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = "You're Not Verified!";
         END IF;
-    END IF;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_check_dropbox_capacity` BEFORE INSERT ON `pickup_waste` FOR EACH ROW BEGIN
-    DECLARE dropbox_status ENUM('Full', 'Available');
-
-    -- Mendapatkan status dropbox terkait
-    SELECT status INTO dropbox_status
-    FROM dropbox
-    WHERE dropbox_id = NEW.dropbox_id;
-
-    -- Jika status dropbox adalah 'Full', batalkan operasi
-    IF dropbox_status = 'Full' THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Cannot add pickup request: Dropbox is full.';
     END IF;
 END */;;
 DELIMITER ;
@@ -495,11 +502,11 @@ DELIMITER ;;
         END IF;
 
         -- Update total waste untuk courier
-        IF NEW.courier_id IS NOT NULL THEN
-            INSERT INTO courier_points (courier_id, total_points)
-            VALUES (NEW.courier_id, total_points)
-            ON DUPLICATE KEY UPDATE total_points = total_points + VALUES(total_points);
-        END IF;
+        -- IF NEW.courier_id IS NOT NULL THEN
+        --     INSERT INTO courier_points (courier_id, total_points)
+        --     VALUES (NEW.courier_id, total_points)
+        --     ON DUPLICATE KEY UPDATE total_points = total_points + VALUES(total_points);
+        -- END IF;
     END IF;
 END */;;
 DELIMITER ;
@@ -610,7 +617,6 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `photo`,
  1 AS `is_verified`,
  1 AS `status`,
- 1 AS `total_points_collected`,
  1 AS `created_at`,
  1 AS `updated_at`*/;
 SET character_set_client = @saved_cs_client;
@@ -861,7 +867,7 @@ CREATE TABLE `waste` (
 
 LOCK TABLES `waste` WRITE;
 /*!40000 ALTER TABLE `waste` DISABLE KEYS */;
-INSERT INTO `waste` VALUES (1,'Kulkas',100,1,NULL,'Peralatan rumah tangga besar untuk pendinginan','2024-11-27 14:54:16','2024-11-27 14:54:16'),(2,'Mesin Cuci',100,1,NULL,'Peralatan rumah tangga untuk mencuci pakaian','2024-11-27 14:54:16','2024-11-27 14:54:16'),(3,'AC',75,1,NULL,'Peralatan pendingin udara','2024-11-27 14:54:16','2024-11-27 14:54:16'),(4,'Dispenser',50,1,NULL,'Alat untuk menyalurkan air minum','2024-11-27 14:54:16','2024-11-27 14:54:16'),(5,'Televisi >= 32 inch',20,1,NULL,'Televisi berukuran besar','2024-11-27 14:54:16','2024-11-27 14:54:16'),(6,'Peralatan besar lainnya',40,1,NULL,'Limbah peralatan besar lainnya','2024-11-27 14:54:16','2024-11-27 14:54:16'),(7,'Blender',25,2,NULL,'Alat untuk menghaluskan bahan makanan','2024-11-27 14:54:16','2024-11-27 14:54:16'),(8,'Pemanggang Roti',20,2,NULL,'Alat untuk memanggang roti','2024-11-27 14:54:16','2024-11-27 14:54:16'),(9,'Vacuum Cleaner',40,2,NULL,'Alat pembersih debu','2024-11-27 14:54:16','2024-11-27 14:54:16'),(10,'Setrika',15,2,NULL,'Alat untuk merapikan pakaian','2024-11-27 14:54:16','2024-11-27 14:54:16'),(11,'Hairdryer',10,2,NULL,'Pengering rambut','2024-11-27 14:54:16','2024-11-27 14:54:16'),(12,'Oven Kecil',15,2,NULL,'Oven berukuran kecil','2024-11-27 14:54:16','2024-11-27 14:54:16'),(13,'Microwave',30,2,NULL,'Alat pemanas makanan','2024-11-27 14:54:16','2024-11-27 14:54:16'),(14,'Kipas Angin',15,2,NULL,'Alat untuk menghasilkan angin','2024-11-27 14:54:16','2024-11-27 14:54:16'),(15,'Peralatan kecil lainnya',20,2,NULL,'Limbah peralatan kecil lainnya','2024-11-27 14:54:16','2024-11-27 14:54:16'),(16,'Komputer',50,3,NULL,'Perangkat elektronik untuk komputasi','2024-11-27 14:54:16','2024-11-27 14:54:16'),(17,'Laptop',40,3,NULL,'Komputer portabel','2024-11-27 14:54:16','2024-11-27 14:54:16'),(18,'Smartphone',30,3,NULL,'Telepon pintar','2024-11-27 14:54:16','2024-11-27 14:54:16'),(19,'Tablet',35,3,NULL,'Komputer layar sentuh portabel','2024-11-27 14:54:16','2024-11-27 14:54:16'),(20,'Printer',20,3,NULL,'Alat untuk mencetak dokumen','2024-11-27 14:54:16','2024-11-27 14:54:16'),(21,'Router',5,3,NULL,'Alat jaringan untuk koneksi internet','2024-11-27 14:54:16','2024-11-27 14:54:16'),(22,'Peralatan IT lainnya',7,3,NULL,'Limbah perangkat IT lainnya','2024-11-27 14:54:16','2024-11-27 14:54:16'),(23,'Lampu Fluorescent',3,4,NULL,'Lampu tabung hemat energi','2024-11-27 14:54:16','2024-11-27 14:54:16'),(24,'Lampu LED',1,4,NULL,'Lampu LED berdaya rendah','2024-11-27 14:54:16','2024-11-27 14:54:16'),(25,'Smartlamp',5,4,NULL,'Lampu pintar yang dapat dikontrol','2024-11-27 14:54:16','2024-11-27 14:54:16'),(26,'Lampu lainnya',1,4,NULL,'Limbah lampu jenis lainnya','2024-11-27 14:54:16','2024-11-27 14:54:16'),(27,'Robot',8,5,NULL,'Mainan elektronik berbentuk robot','2024-11-27 14:54:16','2024-11-27 14:54:16'),(28,'Drone',20,5,NULL,'Pesawat tanpa awak untuk bermain','2024-11-27 14:54:16','2024-11-27 14:54:16'),(29,'Konsol Permainan',40,5,NULL,'Perangkat elektronik untuk bermain game','2024-11-27 14:54:16','2024-11-27 14:54:16'),(30,'Mainan elektronik lainnya',10,5,NULL,'Limbah mainan elektronik lainnya','2024-11-27 14:54:16','2024-11-27 14:54:16'),(31,'Baterai Besar',25,6,NULL,'Limbah baterai berukuran besar','2024-11-27 14:54:16','2024-11-27 14:54:16'),(32,'Terminal',2,6,NULL,'Alat sambungan listrik','2024-11-27 14:54:16','2024-11-27 14:54:16');
+INSERT INTO `waste` VALUES (1,'Kulkas',100,1,NULL,'Peralatan rumah tangga besar untuk pendinginan','2024-12-16 14:25:33','2024-12-16 14:25:33'),(2,'Mesin Cuci',100,1,NULL,'Peralatan rumah tangga untuk mencuci pakaian','2024-12-16 14:25:33','2024-12-16 14:25:33'),(3,'AC',75,1,NULL,'Peralatan pendingin udara','2024-12-16 14:25:33','2024-12-16 14:25:33'),(4,'Dispenser',50,1,NULL,'Alat untuk menyalurkan air minum','2024-12-16 14:25:33','2024-12-16 14:25:33'),(5,'Televisi >= 32 inch',20,1,NULL,'Televisi berukuran besar','2024-12-16 14:25:33','2024-12-16 14:25:33'),(6,'Peralatan besar lainnya',40,1,NULL,'Limbah peralatan besar lainnya','2024-12-16 14:25:33','2024-12-16 14:25:33'),(7,'Blender',25,2,NULL,'Alat untuk menghaluskan bahan makanan','2024-12-16 14:25:33','2024-12-16 14:25:33'),(8,'Pemanggang Roti',20,2,NULL,'Alat untuk memanggang roti','2024-12-16 14:25:33','2024-12-16 14:25:33'),(9,'Vacuum Cleaner',40,2,NULL,'Alat pembersih debu','2024-12-16 14:25:33','2024-12-16 14:25:33'),(10,'Setrika',15,2,NULL,'Alat untuk merapikan pakaian','2024-12-16 14:25:33','2024-12-16 14:25:33'),(11,'Hairdryer',10,2,NULL,'Pengering rambut','2024-12-16 14:25:33','2024-12-16 14:25:33'),(12,'Oven Kecil',15,2,NULL,'Oven berukuran kecil','2024-12-16 14:25:33','2024-12-16 14:25:33'),(13,'Microwave',30,2,NULL,'Alat pemanas makanan','2024-12-16 14:25:33','2024-12-16 14:25:33'),(14,'Kipas Angin',15,2,NULL,'Alat untuk menghasilkan angin','2024-12-16 14:25:33','2024-12-16 14:25:33'),(15,'Peralatan kecil lainnya',20,2,NULL,'Limbah peralatan kecil lainnya','2024-12-16 14:25:33','2024-12-16 14:25:33'),(16,'Komputer',50,3,NULL,'Perangkat elektronik untuk komputasi','2024-12-16 14:25:33','2024-12-16 14:25:33'),(17,'Laptop',40,3,NULL,'Komputer portabel','2024-12-16 14:25:33','2024-12-16 14:25:33'),(18,'Smartphone',30,3,NULL,'Telepon pintar','2024-12-16 14:25:33','2024-12-16 14:25:33'),(19,'Tablet',35,3,NULL,'Komputer layar sentuh portabel','2024-12-16 14:25:33','2024-12-16 14:25:33'),(20,'Printer',20,3,NULL,'Alat untuk mencetak dokumen','2024-12-16 14:25:33','2024-12-16 14:25:33'),(21,'Router',5,3,NULL,'Alat jaringan untuk koneksi internet','2024-12-16 14:25:33','2024-12-16 14:25:33'),(22,'Peralatan IT lainnya',7,3,NULL,'Limbah perangkat IT lainnya','2024-12-16 14:25:33','2024-12-16 14:25:33'),(23,'Lampu Fluorescent',3,4,NULL,'Lampu tabung hemat energi','2024-12-16 14:25:33','2024-12-16 14:25:33'),(24,'Lampu LED',1,4,NULL,'Lampu LED berdaya rendah','2024-12-16 14:25:33','2024-12-16 14:25:33'),(25,'Smartlamp',5,4,NULL,'Lampu pintar yang dapat dikontrol','2024-12-16 14:25:33','2024-12-16 14:25:33'),(26,'Lampu lainnya',1,4,NULL,'Limbah lampu jenis lainnya','2024-12-16 14:25:33','2024-12-16 14:25:33'),(27,'Robot',8,5,NULL,'Mainan elektronik berbentuk robot','2024-12-16 14:25:34','2024-12-16 14:25:34'),(28,'Drone',20,5,NULL,'Pesawat tanpa awak untuk bermain','2024-12-16 14:25:34','2024-12-16 14:25:34'),(29,'Konsol Permainan',40,5,NULL,'Perangkat elektronik untuk bermain game','2024-12-16 14:25:34','2024-12-16 14:25:34'),(30,'Mainan elektronik lainnya',10,5,NULL,'Limbah mainan elektronik lainnya','2024-12-16 14:25:34','2024-12-16 14:25:34'),(31,'Baterai Besar',25,6,NULL,'Limbah baterai berukuran besar','2024-12-16 14:25:34','2024-12-16 14:25:34'),(32,'Terminal',2,6,NULL,'Alat sambungan listrik','2024-12-16 14:25:34','2024-12-16 14:25:34');
 /*!40000 ALTER TABLE `waste` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -888,7 +894,7 @@ CREATE TABLE `waste_type` (
 
 LOCK TABLES `waste_type` WRITE;
 /*!40000 ALTER TABLE `waste_type` DISABLE KEYS */;
-INSERT INTO `waste_type` VALUES (1,'Peralatan rumah tangga besar',NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(2,'Peralatan rumah tangga kecil',NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(3,'Peralatan IT',NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(4,'Lampu',NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(5,'Mainan',NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00'),(6,'Peralatan elektronik lainnya',NULL,'2024-11-27 14:54:00','2024-11-27 14:54:00');
+INSERT INTO `waste_type` VALUES (1,'Peralatan rumah tangga besar',NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(2,'Peralatan rumah tangga kecil',NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(3,'Peralatan IT',NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(4,'Lampu',NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(5,'Mainan',NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22'),(6,'Peralatan elektronik lainnya',NULL,'2024-12-16 14:25:22','2024-12-16 14:25:22');
 /*!40000 ALTER TABLE `waste_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1193,143 +1199,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `add_to_cart` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `add_to_cart`(
-    IN p_community_id INT,
-    IN p_waste_id INT,
-    IN p_quantity INT
-)
-BEGIN
-    DECLARE existing_quantity INT DEFAULT 0;
-
-    -- Check if the item already exists in the cart
-    SELECT quantity INTO existing_quantity
-    FROM pickup_detail
-    WHERE community_id = p_community_id AND waste_id = p_waste_id;
-
-    IF existing_quantity IS NOT NULL THEN
-        -- Update the quantity if item exists
-        UPDATE pickup_detail
-        SET quantity = quantity + p_quantity
-        WHERE community_id = p_community_id AND waste_id = p_waste_id;
-    ELSE
-        -- Insert new item if it does not exist
-        INSERT INTO pickup_detail (community_id, waste_id, quantity)
-        VALUES (p_community_id, p_waste_id, p_quantity);
-    END IF;
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `add_waste` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `add_waste`(
-    IN p_waste_name VARCHAR(255),
-    IN p_point INT,
-    IN p_waste_type_id INT,
-    IN p_image VARCHAR(255),
-    IN p_description TEXT
-)
-BEGIN
-    INSERT INTO waste (waste_name, point, waste_type_id, image, description)
-    VALUES (p_waste_name, p_point, p_waste_type_id, p_image, p_description);
-    SELECT 'Waste item added successfully.' AS result_message;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `add_waste_type` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `add_waste_type`(
-    IN p_waste_type_name ENUM(
-        'Large Household Appliance', 
-        'Small Household Appliances', 
-        'IT Equipment', 
-        'Lamps', 
-        'Toys', 
-        'Screens and Monitors', 
-        'Other Electronic Devices'),
-    IN p_image VARCHAR(255)
-)
-BEGIN
-    INSERT INTO waste_type (waste_type_name, image)
-    VALUES (p_waste_type_name, p_image);
-    SELECT 'Waste type added successfully.' AS result_message;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `approval_management` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `approval_management`(
-    IN p_management_id INT
-)
-BEGIN
-    -- Validasi jika management_id ada
-    DECLARE id_exists INT;
-
-    SELECT COUNT(*) INTO id_exists
-    FROM management
-    WHERE management_id = p_management_id;
-
-    IF id_exists = 0 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Id not found!';
-    ELSE
-        -- Update status is_verified menjadi 1 untuk approval
-        UPDATE management
-        SET is_verified = 1
-        WHERE management_id = p_management_id;
-
-        -- Tampilkan pesan sukses
-        SELECT 'Management user approved successfully.' AS result_message;
-    END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `approve_community_registration` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1355,55 +1224,6 @@ BEGIN
         WHEN p_approve = 1 THEN 'Community registration approved successfully.'
         ELSE 'Community registration rejected.'
     END AS result_message;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `approve_courier_registration` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `approve_courier_registration`(
-    IN p_courier_id INT,
-    IN p_approve ENUM('Pending', 'Approved', 'Reject')
-)
-BEGIN
-    DECLARE is_files_complete BOOLEAN;
-
-    -- Periksa kelengkapan berkas, yaitu NIK, ktp_url, dan kk_url harus tidak NULL
-    SET is_files_complete = (SELECT 
-        CASE 
-            WHEN nik IS NOT NULL AND ktp_url IS NOT NULL AND kk_url IS NOT NULL THEN TRUE 
-            ELSE FALSE 
-        END
-    FROM courier
-    WHERE courier_id = p_courier_id);
-
-    -- Jika berkas lengkap, lanjutkan dengan update status
-    IF is_files_complete THEN
-        UPDATE courier
-        SET status = p_approve,
-            is_verified = IF(p_approve = 'Approved', 1, 0)
-        WHERE courier_id = p_courier_id;
-        
-        -- Kembalikan pesan sukses
-        SELECT CASE 
-            WHEN p_approve = 'Approved' THEN 'Courier registration approved successfully.'
-            WHEN p_approve = 'Reject' THEN 'Courier registration rejected.'
-            ELSE 'Courier registration set to pending.'
-        END AS result_message;
-    ELSE
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Courier documents are incomplete. Please check NIK, KTP URL, and KK URL.';
-    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1558,180 +1378,6 @@ BEGIN
         -- Tampilkan pesan sukses
         SELECT 'Management user deleted successfully.' AS result_message;
     END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `delete_waste` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_waste`(
-    IN p_waste_id INT
-)
-BEGIN
-    DECLARE waste_exists INT;
-
-    -- Cek apakah waste_id ada
-    SELECT COUNT(*) INTO waste_exists
-    FROM waste
-    WHERE waste_id = p_waste_id;
-
-    IF waste_exists = 0 THEN
-        SELECT 'Id not found!' AS result_message;
-    ELSE
-        DELETE FROM waste
-        WHERE waste_id = p_waste_id;
-        SELECT 'Waste item deleted successfully.' AS result_message;
-        ALTER TABLE waste AUTO_INCREMENT = 1;
-    END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `delete_waste_type` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_waste_type`(
-    IN p_waste_type_id INT
-)
-BEGIN
-    DECLARE waste_type_exists INT;
-
-    -- Cek apakah waste_type_id ada
-    SELECT COUNT(*) INTO waste_type_exists
-    FROM waste_type
-    WHERE waste_type_id = p_waste_type_id;
-
-    IF waste_type_exists = 0 THEN
-        SELECT 'Id not found!' AS result_message;
-    ELSE
-        DELETE FROM waste_type
-        WHERE waste_type_id = p_waste_type_id;
-        SELECT 'Waste type deleted successfully.' AS result_message;
-        ALTER TABLE waste_type AUTO_INCREMENT = 1;
-    END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `manage_waste` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `manage_waste`(
-    IN p_action ENUM('add', 'update', 'delete'),
-    IN p_waste_id INT,
-    IN p_waste_name VARCHAR(255),
-    IN p_point INT,
-    IN p_waste_type_id INT,
-    IN p_image VARCHAR(255),
-    IN p_description TEXT
-)
-BEGIN
-    CASE p_action
-        WHEN 'add' THEN
-            INSERT INTO waste (waste_name, point, waste_type_id, image, description)
-            VALUES (p_waste_name, p_point, p_waste_type_id, p_image, p_description);
-            SELECT 'Waste item added successfully.' AS result_message;
-
-        WHEN 'update' THEN
-            UPDATE waste
-            SET waste_name = p_waste_name,
-                point = p_point,
-                waste_type_id = p_waste_type_id,
-                image = p_image,
-                description = p_description
-            WHERE waste_id = p_waste_id;
-            SELECT 'Waste item updated successfully.' AS result_message;
-
-        WHEN 'delete' THEN
-            DELETE FROM waste
-            WHERE waste_id = p_waste_id;
-            SELECT 'Waste item deleted successfully.' AS result_message;
-            ALTER TABLE waste AUTO_INCREMENT = 1;
-
-        ELSE
-            SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'Invalid action.';
-    END CASE;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `manage_waste_type` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `manage_waste_type`(
-    IN p_action ENUM('add', 'update', 'delete'),
-    IN p_waste_type_id INT,
-    IN p_waste_type_name ENUM(
-        'Peralatan rumah tangga besar', 
-        'Peralatan rumah tangga kecil', 
-        'Peralatan IT', 
-        'Lampu', 
-        'Mainan', 
-        'Peralatan elektronik lainnya'),
-    IN p_image VARCHAR(255)
-)
-BEGIN
-    CASE p_action
-        WHEN 'add' THEN
-            INSERT INTO waste_type (waste_type_name, image)
-            VALUES (p_waste_type_name, p_image);
-            SELECT 'Waste type added successfully.' AS result_message;
-
-        WHEN 'update' THEN
-            UPDATE waste_type
-            SET waste_type_name = p_waste_type_name,
-                image = p_image
-            WHERE waste_type_id = p_waste_type_id;
-            SELECT 'Waste type updated successfully.' AS result_message;
-
-        WHEN 'delete' THEN
-            DELETE FROM waste_type
-            WHERE waste_type_id = p_waste_type_id;
-            SELECT 'Waste type deleted successfully.' AS result_message;
-            ALTER TABLE waste_type AUTO_INCREMENT = 1;
-
-        ELSE
-            SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'Invalid action.';
-    END CASE;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1937,31 +1583,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `remove_from_cart` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `remove_from_cart`(
-    IN p_community_id INT,
-    IN p_waste_id INT
-)
-BEGIN
-    -- Remove item from cart
-    DELETE FROM pickup_detail
-    WHERE community_id = p_community_id AND waste_id = p_waste_id;
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `reset_auto_increment` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2027,83 +1648,6 @@ BEGIN
         -- Tampilkan pesan sukses
         SELECT 'Management user set as admin successfully.' AS result_message;
     END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `update_cart_quantity` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_cart_quantity`(
-    IN p_community_id INT,
-    IN p_waste_id INT,
-    IN p_quantity INT
-)
-BEGIN
-    IF new_quantity > 0 THEN
-        -- Update quantity if new quantity is greater than zero
-        UPDATE pickup_detail
-        SET quantity = p_quantity
-        WHERE community_id = p_community_id AND waste_id = p_waste_id;
-    ELSE
-        -- Remove item if new quantity is zero or less
-        DELETE FROM pickup_detail
-        WHERE community_id = p_community_id AND waste_id = p_waste_id;
-    END IF;
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `update_courier_documents` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_courier_documents`(
-    IN p_courier_id INT,
-    IN p_ktp_url VARCHAR(255),
-    IN p_kk_url VARCHAR(255)
-)
-BEGIN
-    DECLARE message VARCHAR(255);
-
-    -- Periksa apakah courier_id ada dalam tabel
-    IF EXISTS (SELECT 1 FROM courier WHERE courier_id = p_courier_id) THEN
-        -- Update dokumen KTP dan KK
-        UPDATE courier
-        SET 
-            ktp_url = p_ktp_url,
-            kk_url = p_kk_url,
-            status = 'Pending'  -- Set status menjadi Pending untuk validasi ulang
-        WHERE 
-            courier_id = p_courier_id;
-
-        -- Pesan sukses
-        SET message = 'Document has been successfully uploaded';
-    ELSE
-        -- Jika courier_id tidak ditemukan, kembalikan pesan error
-        SET message = 'Courier ID not found!';
-    END IF;
-
-    -- Kembalikan pesan hasil
-    SELECT message AS result_message;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2212,95 +1756,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `update_waste` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_waste`(
-    IN p_waste_id INT,
-    IN p_waste_name VARCHAR(255),
-    IN p_point INT,
-    IN p_waste_type_id INT,
-    IN p_image VARCHAR(255),
-    IN p_description TEXT
-)
-BEGIN
-    DECLARE waste_exists INT;
-
-    -- Cek apakah waste_id ada
-    SELECT COUNT(*) INTO waste_exists
-    FROM waste
-    WHERE waste_id = p_waste_id;
-
-    IF waste_exists = 0 THEN
-        SELECT 'Id not found!' AS result_message;
-    ELSE
-        UPDATE waste
-        SET waste_name = p_waste_name,
-            point = p_point,
-            waste_type_id = p_waste_type_id,
-            image = p_image,
-            description = p_description
-        WHERE waste_id = p_waste_id;
-        SELECT 'Waste item updated successfully.' AS result_message;
-    END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `update_waste_type` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_waste_type`(
-    IN p_waste_type_id INT,
-    IN p_waste_type_name ENUM(
-        'Large Household Appliance', 
-        'Small Household Appliances',
-        'IT Equipment', 
-        'Lamps', 
-        'Toys', 
-        'Screens and Monitors', 
-        'Other Electronic Devices'),
-    IN p_image VARCHAR(255)
-)
-BEGIN
-    DECLARE waste_type_exists INT;
-
-    -- Cek apakah waste_type_id ada
-    SELECT COUNT(*) INTO waste_type_exists
-    FROM waste_type
-    WHERE waste_type_id = p_waste_type_id;
-
-    IF waste_type_exists = 0 THEN
-        SELECT 'Id not found!' AS result_message;
-    ELSE
-        UPDATE waste_type
-        SET waste_type_name = p_waste_type_name,
-            image = p_image
-        WHERE waste_type_id = p_waste_type_id;
-        SELECT 'Waste type updated successfully.' AS result_message;
-    END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `view_dropbox_status`
@@ -2387,7 +1842,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_courier_profile` AS select `c`.`courier_id` AS `courier_id`,`c`.`name` AS `courier_name`,`c`.`email` AS `email`,`c`.`phone` AS `phone`,`c`.`date_of_birth` AS `date_of_birth`,`c`.`address` AS `address`,`c`.`account_number` AS `account_number`,`c`.`nik` AS `nik`,`c`.`ktp_url` AS `ktp_url`,`c`.`kk_url` AS `kk_url`,`c`.`photo` AS `photo`,`c`.`is_verified` AS `is_verified`,`c`.`status` AS `status`,ifnull(sum(`cp`.`total_points`),0) AS `total_points_collected`,`c`.`created_at` AS `created_at`,`c`.`updated_at` AS `updated_at` from (`courier` `c` left join `courier_points` `cp` on((`c`.`courier_id` = `cp`.`courier_id`))) group by `c`.`courier_id`,`c`.`name`,`c`.`email`,`c`.`phone`,`c`.`date_of_birth`,`c`.`address`,`c`.`account_number`,`c`.`nik`,`c`.`ktp_url`,`c`.`kk_url`,`c`.`photo`,`c`.`is_verified`,`c`.`status`,`c`.`created_at`,`c`.`updated_at` */;
+/*!50001 VIEW `vw_courier_profile` AS select `c`.`courier_id` AS `courier_id`,`c`.`name` AS `courier_name`,`c`.`email` AS `email`,`c`.`phone` AS `phone`,`c`.`date_of_birth` AS `date_of_birth`,`c`.`address` AS `address`,`c`.`account_number` AS `account_number`,`c`.`nik` AS `nik`,`c`.`ktp_url` AS `ktp_url`,`c`.`kk_url` AS `kk_url`,`c`.`photo` AS `photo`,`c`.`is_verified` AS `is_verified`,`c`.`status` AS `status`,`c`.`created_at` AS `created_at`,`c`.`updated_at` AS `updated_at` from `courier` `c` group by `c`.`courier_id`,`c`.`name`,`c`.`email`,`c`.`phone`,`c`.`date_of_birth`,`c`.`address`,`c`.`account_number`,`c`.`nik`,`c`.`ktp_url`,`c`.`kk_url`,`c`.`photo`,`c`.`is_verified`,`c`.`status`,`c`.`created_at`,`c`.`updated_at` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2635,4 +2090,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-27 22:37:41
+-- Dump completed on 2024-12-16 21:58:29

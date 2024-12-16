@@ -23,7 +23,7 @@ CREATE TABLE courier (
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255),
-    phone VARCHAR(15) UNIQUE NOT NULL,
+    phone VARCHAR(15) NULL,
     date_of_birth DATE,
     address VARCHAR(255),
     account_number VARCHAR(50),
